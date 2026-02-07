@@ -24,6 +24,40 @@
       </a>
     </div>
   {% endcomment %}
+  <style>
+    .is-dropdown {
+      visibility: hidden;
+      opacity: 0;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 12rem;
+      background-color: #ffffff;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      margin-top: 1rem;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      transition-property: all;
+      transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+      transition-duration: 150ms;
+      border: 1px solid #f4f4f5;
+    }
+
+    .has-drowdown:hover .is-dropdown {
+      visibility: visible;
+      opacity: 1;
+    }
+    .has-drowdown:hover .is-dropdown > li {
+      transition: all 0.3s ease-in-out;
+    }
+    .has-drowdown:hover .is-dropdown > li:hover a {
+      font-weight: bold;
+      color: #000;
+    }
+  </style>
+
   <nav class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent py-5">
     <div class="max-w-7xl mx-auto px-4 md:px-8 flex items-center justify-between">
       <button class="lg:hidden p-2 -ml-2 text-zinc-800">
@@ -36,28 +70,29 @@
       </div>
 
       <ul class="hidden lg:flex items-center space-x-10 text-sm font-medium uppercase tracking-widest text-zinc-600">
-        {% for link in section.settings.menu.links %}
-          <li class="group relative">
-            <button class="flex items-center gap-1 hover:text-zinc-900 transition-colors">
-              Shop
-              {{ 'arrow-down.svg' | inline_asset_content }}
-            </button>
-            <ul class="invisible group-hover:visible absolute top-full left-0 w-48 bg-white shadow-xl mt-4 p-4 flex flex-col gap-3 transition-all opacity-0 group-hover:opacity-100 border border-zinc-100">
-              <li class="text-left hover:text-zinc-900">Drinkware</li>
-              <li class="text-left hover:text-zinc-900">Serveware</li>
-              <li class="text-left hover:text-zinc-900">Decorative Glass</li>
-              <li class="text-left hover:text-zinc-900">Gifts</li>
-              <div class="border-t border-zinc-100 pt-3">
-                <li class="text-left hover:text-zinc-900">New Arrivals</li>
-              </div>
-              <li class="text-left text-red-600 hover:text-red-700">Sale</li>
-            </ul>
+        {% assign selected_menu = section.settings.menu %}
+
+        {% for link in linklists[selected_menu].links %}
+          <li class="{% if link.links.size > 0 %} has-drowdown relative {% else %} hover:text-zinc-900 transition-colors uppercase tracking-widest {% endif %}">
+            {% if link.links.size > 0 %}
+              <button class="flex items-center gap-1 hover:text-zinc-900 transition-colors">
+                {{ link.title }}
+                {{ 'arrow-down.svg' | inline_asset_content }}
+              </button>
+            {% else %}
+              <a href="" class="hover:text-zinc-900 transition-colors lowercase tracking-widest"> {{ link.title }}</a>
+            {% endif %}
+            {% if link.links.size > 0 %}
+              <ul class="is-dropdown">
+                {% for child_link in link.links %}
+                  <li class="text-left hover:text-zinc-900">
+                    <a href="{{ child_link.url }}">{{ child_link.title }}</a>
+                  </li>
+                {% endfor %}
+              </ul>
+            {% endif %}
           </li>
         {% endfor %}
-
-        <li class="hover:text-zinc-900 transition-colors uppercase tracking-widest">Collections</li>
-        <li class="hover:text-zinc-900 transition-colors uppercase tracking-widest">About Us</li>
-        <li><a href="#" class="hover:text-zinc-900 transition-colors uppercase tracking-widest">Contact</a></li>
       </ul>
       <div class="flex items-center space-x-4 md:space-x-6 text-zinc-800">
         <button class="p-1 hover:text-zinc-500 transition-colors">
@@ -106,6 +141,22 @@
     gap: 1rem;
   }
 {% endstylesheet %}
+{%- if request.page_type == 'index' -%}
+  {% assign potential_action_target = request.origin | append: routes.search_url | append: '?q={search_term_string}' %}
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "WebSite",
+      "name": {{ shop.name | json }},
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {{ potential_action_target | json }},
+        "query-input": "required name=search_term_string"
+      },
+      "url": {{ request.origin | append: page.url | json }}
+    }
+  </script>
+{%- endif -%}
 
 {% schema %}
 {
@@ -115,6 +166,16 @@
       "type": "link_list",
       "id": "menu",
       "label": "t:labels.menu"
+    },
+    {
+      "type": "image_picker",
+      "id": "search_icon",
+      "label": "Search Icon"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "@app"
     }
   ]
 }
