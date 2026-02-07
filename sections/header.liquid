@@ -72,7 +72,7 @@
       <ul class="hidden lg:flex items-center space-x-10 text-sm font-medium uppercase tracking-widest text-zinc-600">
         {% assign selected_menu = section.settings.menu %}
 
-        {% for link in linklists[selected_menu].links %}
+        {% for link in section.settings.menu.links %}
           <li class="{% if link.links.size > 0 %} has-drowdown relative {% else %} hover:text-zinc-900 transition-colors uppercase tracking-widest {% endif %}">
             {% if link.links.size > 0 %}
               <button class="flex items-center gap-1 hover:text-zinc-900 transition-colors">
