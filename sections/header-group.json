@@ -14,7 +14,8 @@
     "header": {
       "type": "header",
       "settings": {
-        "menu": "header_menu"
+        "menu": "header_menu",
+        "search_icon": "shopify://shop_images/search-icon-pink.png"
       }
     }
   },
