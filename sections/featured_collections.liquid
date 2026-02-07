@@ -1,0 +1,88 @@
+<div class="cursor-pointer">
+  <!--
+    Product Categories Grid Section
+    Displays a responsive grid of product categories with hover effects
+    Layout: 1 column mobile, 2 columns tablet, 4 columns desktop
+  -->
+  <section
+    class="py-24 max-w-7xl mx-auto px-4 md:px-8"
+    aria-labelledby="categories-heading"
+  >
+    <!-- Visually hidden heading for screen readers -->
+    <h2 id="categories-heading" class="sr-only">Product Categories</h2>
+
+    <!-- Responsive Grid Container -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <!-- Category Card: Drinkware -->
+      {% for collection in collections limit: 4 %}
+        <article class="group cursor-pointer relative overflow-hidden bg-zinc-100 aspect-[4/5]">
+          <a href="{{ collection.url }}" class="">
+            <!--
+              Category Image
+              - Scales up 110% on hover (duration: 700ms)
+              - Opacity increases from 90% to 100% on hover
+            -->
+            <img
+              alt="Drinkware collection featuring mugs, glasses, and tumblers"
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-90 group-hover:opacity-100"
+              src="{{ collection.image | img_url: '480x480' }}"
+              loading="lazy"
+              width="280"
+              height="350"
+            >
+
+            <!--
+              Category Information Overlay
+              - Positioned at bottom with gradient background
+              - Contains item count, category name, and CTA link
+            -->
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex flex-col justify-end p-8">
+              <!-- Item Count Badge -->
+              <span
+                class="text-white/70 text-[10px] tracking-[0.3em] uppercase mb-2"
+                aria-label="{{ collection.products_count }} items in this category"
+              >
+                {{ collection.products_count }} items
+              </span>
+
+              <!-- Category Title -->
+              <h3 class="text-2xl text-white mb-4">
+                {{ collection.title }}
+              </h3>
+
+              <!--
+                Call-to-Action Link
+                - Hidden by default, slides in from left on hover
+                - Transitions: opacity and translateX
+              -->
+              <a
+                href="#drinkware"
+                class="flex items-center gap-2 text-white text-[10px] font-bold tracking-[0.2em] uppercase opacity-0 -translate-x-4 transition-all group-hover:opacity-100 group-hover:translate-x-0"
+                aria-label="Shop Drinkware collection"
+              >
+                Shop {{ collection.title }}
+                <!-- Arrow Icon (Lucide) -->
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-arrow-right"
+                  aria-hidden="true"
+                >
+                  <path d="M5 12h14"></path>
+                  <path d="m12 5 7 7-7 7"></path>
+                </svg>
+              </a>
+            </div>
+          </a>
+        </article>
+      {% endfor %}
+    </div>
+  </section>
+</div>

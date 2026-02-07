@@ -21,12 +21,6 @@
   --content-margin: minmax(var(--page-margin), 1fr);
   --content-grid: var(--content-margin) var(--content-width)
     var(--content-margin);
-
-  /* This is required to make <img> elements work as background images */
-  position: relative;
-  grid-template-columns: var(--content-grid);
-  display: grid;
-  width: 100%;
 }
 
 /* Child elements, by default, are constrained to the central column of the grid. */

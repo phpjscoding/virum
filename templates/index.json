@@ -10,11 +10,19 @@
 {
   "sections": {
     "main": {
-      "type": "hello-world",
-      "settings": {}
+      "type": "Hero",
+      "settings": {
+        "tag": "div",
+        "class": "w-full h-screen flex items-center justify-center bg-gray-100"
+      }
+    },
+    "featured_collection": {
+      "type": "featured_collections",
+      "settings": {
+        "tag": "section",
+        "class": "p-3"
+      }
     }
   },
-  "order": [
-    "main"
-  ]
+  "order": ["main", "featured_collection"]
 }

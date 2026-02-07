@@ -1,4 +1,4 @@
-<header>
+<header class="absolute">
   {% comment %}
     <h2 class="header__title">
       {{ shop.name | link_to: routes.root_url }}
@@ -58,7 +58,7 @@
     }
   </style>
 
-  <nav class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent py-5">
+  <nav class="header_nav fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent py-5">
     <div class="max-w-7xl mx-auto px-4 md:px-8 flex items-center justify-between">
       <button class="lg:hidden p-2 -ml-2 text-zinc-800">
         {{ 'burgger-menu.svg' | inline_asset_content }}
@@ -97,16 +97,24 @@
       <div class="flex items-center space-x-4 md:space-x-6 text-zinc-800">
         <button class="p-1 hover:text-zinc-500 transition-colors">
           {% if section.settings.search_icon != blank %}
-            {{ section.settings.search_icon | image_url: width: 30 | image_tag }}
+            {{ section.settings.search_icon | image_url: width: 32 | image_tag }}
           {% else %}
             {{ 'search-icon.svg' | inline_asset_content }}
           {% endif %}
         </button>
         <button class="p-1 hover:text-zinc-500 transition-colors">
-          {{ 'user-icon.svg' | inline_asset_content }}
+          {% if section.settings.user_icon != blank %}
+            {{ section.settings.user_icon | image_url: width: 32 | image_tag }}
+          {% else %}
+            {{ 'user-icon.svg' | inline_asset_content }}
+          {% endif %}
         </button>
         <button class="p-1 hover:text-zinc-500 transition-colors relative">
-          {{ 'cart-icon.svg' | inline_asset_content }}
+          {% if section.settings.cart_icon != blank %}
+            {{ section.settings.cart_icon | image_url: width: 32 | image_tag }}
+          {% else %}
+            {{ 'cart-icon.svg' | inline_asset_content }}
+          {% endif %}
           {% if cart.item_count > 0 %}
             <span class="absolute -top-1 -right-1 bg-zinc-900 text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold">
               {{ cart.item_count }}
