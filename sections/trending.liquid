@@ -1,1 +1,25 @@
-<div class="trending-section">trending sectino</div>
+<div class="trending-section">trending products</div>
+<div>
+  {% content_for 'blocks' %}
+</div>
+{% schema %}
+{
+  "name": "trending products",
+  "blocks": [
+    { "type": "@theme" }, // accepts all theme blocks (from /blocks)
+    { "type": "@app" } // optional: also accept app blocks
+  ],
+  "settings": [
+    {
+      "type": "text_alignment",
+      "id": "alignment",
+      "label": "Alignment"
+    }
+  ],
+  "presets": [
+    {
+      "name": "trending products"
+    }
+  ]
+}
+{% endschema %}
