@@ -20,7 +20,7 @@
     "trending": {
       "type": "trending",
       "blocks": {
-        "product_card_v1_geBdL9": {
+        "product_card_v1_TAMmTn": {
           "type": "product-card-v1",
           "name": "Prouct Card V1",
           "settings": {
@@ -28,50 +28,7 @@
             "text": ""
           },
           "blocks": {
-            "product_card_v1_AjxN4Q": {
-              "type": "product-card-v1",
-              "name": "Prouct Card V1",
-              "settings": {
-                "background": "#000000",
-                "text": ""
-              },
-              "blocks": {
-                "product_card_v1_cf8rYM": {
-                  "type": "product-card-v1",
-                  "name": "Prouct Card V1",
-                  "settings": {
-                    "background": "#000000",
-                    "text": ""
-                  },
-                  "blocks": {
-                    "product_card_v1_B9yGkB": {
-                      "type": "product-card-v1",
-                      "settings": {
-                        "background": "",
-                        "text": "product card content will be added here"
-                      },
-                      "blocks": {}
-                    }
-                  },
-                  "block_order": [
-                    "product_card_v1_B9yGkB"
-                  ]
-                },
-                "product_card_v1_yFXtTa": {
-                  "type": "product-card-v1",
-                  "settings": {
-                    "background": "",
-                    "text": "product card content will be added here"
-                  },
-                  "blocks": {}
-                }
-              },
-              "block_order": [
-                "product_card_v1_cf8rYM",
-                "product_card_v1_yFXtTa"
-              ]
-            },
-            "product_card_v1_6LCrXq": {
+            "product_card_v1_yAE9w4": {
               "type": "product-card-v1",
               "settings": {
                 "background": "",
@@ -81,12 +38,21 @@
             }
           },
           "block_order": [
-            "product_card_v1_AjxN4Q",
-            "product_card_v1_6LCrXq"
+            "product_card_v1_yAE9w4"
           ]
+        },
+        "product_card_v1_geBdL9": {
+          "type": "product-card-v1",
+          "name": "Prouct Card V1",
+          "settings": {
+            "background": "#000000",
+            "text": ""
+          },
+          "blocks": {}
         }
       },
       "block_order": [
+        "product_card_v1_TAMmTn",
         "product_card_v1_geBdL9"
       ],
       "settings": {
