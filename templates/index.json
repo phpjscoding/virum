@@ -11,25 +11,22 @@
   "sections": {
     "main": {
       "type": "Hero",
-      "settings": {
-        "tag": "div",
-        "class": "w-full h-screen flex items-center justify-center bg-gray-100"
-      }
+      "settings": {}
     },
     "featured_collection": {
       "type": "featured_collections",
-      "settings": {
-        "tag": "section",
-        "class": "p-3"
-      }
+      "settings": {}
     },
     "trending": {
       "type": "trending",
       "settings": {
-        "tag": "section",
-        "class": "p-3"
+        "alignment": "left"
       }
     }
   },
-  "order": ["main", "featured_collection", "trending"]
+  "order": [
+    "main",
+    "featured_collection",
+    "trending"
+  ]
 }
