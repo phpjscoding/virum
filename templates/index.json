@@ -11,25 +11,92 @@
   "sections": {
     "main": {
       "type": "Hero",
-      "settings": {
-        "tag": "div",
-        "class": "w-full h-screen flex items-center justify-center bg-gray-100"
-      }
+      "settings": {}
     },
     "featured_collection": {
       "type": "featured_collections",
-      "settings": {
-        "tag": "section",
-        "class": "p-3"
-      }
+      "settings": {}
     },
     "trending": {
       "type": "trending",
+      "blocks": {
+        "product_card_v1_geBdL9": {
+          "type": "product-card-v1",
+          "name": "Prouct Card V1",
+          "settings": {
+            "background": "#000000",
+            "text": ""
+          },
+          "blocks": {
+            "product_card_v1_AjxN4Q": {
+              "type": "product-card-v1",
+              "name": "Prouct Card V1",
+              "settings": {
+                "background": "#000000",
+                "text": ""
+              },
+              "blocks": {
+                "product_card_v1_cf8rYM": {
+                  "type": "product-card-v1",
+                  "name": "Prouct Card V1",
+                  "settings": {
+                    "background": "#000000",
+                    "text": ""
+                  },
+                  "blocks": {
+                    "product_card_v1_B9yGkB": {
+                      "type": "product-card-v1",
+                      "settings": {
+                        "background": "",
+                        "text": "product card content will be added here"
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "product_card_v1_B9yGkB"
+                  ]
+                },
+                "product_card_v1_yFXtTa": {
+                  "type": "product-card-v1",
+                  "settings": {
+                    "background": "",
+                    "text": "product card content will be added here"
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "product_card_v1_cf8rYM",
+                "product_card_v1_yFXtTa"
+              ]
+            },
+            "product_card_v1_6LCrXq": {
+              "type": "product-card-v1",
+              "settings": {
+                "background": "",
+                "text": "product card content will be added here"
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "product_card_v1_AjxN4Q",
+            "product_card_v1_6LCrXq"
+          ]
+        }
+      },
+      "block_order": [
+        "product_card_v1_geBdL9"
+      ],
       "settings": {
-        "tag": "section",
-        "class": "p-3"
+        "alignment": "left"
       }
     }
   },
-  "order": ["main", "featured_collection", "trending"]
+  "order": [
+    "main",
+    "featured_collection",
+    "trending"
+  ]
 }
