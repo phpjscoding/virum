@@ -22,7 +22,14 @@
         "tag": "section",
         "class": "p-3"
       }
+    },
+    "trending": {
+      "type": "trending",
+      "settings": {
+        "tag": "section",
+        "class": "p-3"
+      }
     }
   },
-  "order": ["main", "featured_collection"]
+  "order": ["main", "featured_collection", "trending"]
 }
