@@ -75,21 +75,34 @@
 
 {% schema %}
 {
-  "name": "product-card-v1",
+  "name": "Product Card",
+  "blocks": [{ "type": "@app" }, { "type": "@theme" }],
   "settings": [
     {
-      "type": "richtext",
-      "id": "text",
-      "label": "Text"
+      "type": "image_picker",
+      "id": "image",
+      "label": "Background image"
+    },
+    {
+      "type": "color_background",
+      "id": "background",
+      "label": "Background color"
     }
   ],
   "presets": [
-    { "name": "product-card-v1" },
     {
-      "name": "Content",
+      "name": "Prouct Card V1",
       "settings": {
-        "text": "<p> product-card </p>"
-      }
+        "background": "#000000"
+      },
+      "blocks": [
+        {
+          "type": "text",
+          "settings": {
+            "text": "product card content will be added here"
+          }
+        }
+      ]
     }
   ]
 }
