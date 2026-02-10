@@ -91,8 +91,8 @@
           <div class="text-center">
             <p class="text-zinc-400 text-[10px] tracking-widest uppercase mb-2">Drinkware</p>
             <h3 class="text-lg text-zinc-900 mb-2">
-              <a href="/products/aurelia-crystal-flute" class="hover:text-zinc-600 transition-colors">
-                {{ product.title }}
+              <a href="/products/{{ product.handle }}" class="hover:text-zinc-600 transition-colors">
+                {{ product.handle | default: 'Aurelia Crystal Flute' }}
               </a>
             </h3>
             <p class="font-medium text-zinc-700 font-sans tracking-wide" aria-label="Price">$45.00</p>
