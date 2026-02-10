@@ -20,6 +20,20 @@
     "trending": {
       "type": "trending",
       "blocks": {
+        "product_3QkgzN": {
+          "type": "product",
+          "settings": {
+            "text": "",
+            "product": "elders-bundle"
+          }
+        },
+        "product_GGf8VG": {
+          "type": "product",
+          "settings": {
+            "text": "",
+            "product": "girls-bundle"
+          }
+        },
         "product_aaTT3H": {
           "type": "product",
           "settings": {
@@ -36,6 +50,8 @@
         }
       },
       "block_order": [
+        "product_3QkgzN",
+        "product_GGf8VG",
         "product_aaTT3H",
         "product_Vqrfzy"
       ],
