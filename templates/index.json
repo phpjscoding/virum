@@ -18,15 +18,8 @@
       "settings": {}
     },
     "trending": {
-      "type": "trending",
-      "settings": {
-        "alignment": "left"
-      }
+      "type": "trending"
     }
   },
-  "order": [
-    "main",
-    "featured_collection",
-    "trending"
-  ]
+  "order": ["main", "featured_collection", "trending"]
 }
