@@ -23,7 +23,7 @@
     <!-- Product Grid -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12" role="list">
       <!-- Product 1: Aurelia Crystal Flute -->
-      {% for product in section.settings.blocks %}
+      {% for product in section.blocks %}
         <article class="flex-col group" role="listitem">
           <div class="relative aspect-[3/4] overflow-hidden bg-zinc-50 mb-6">
             <img
@@ -92,7 +92,7 @@
             <p class="text-zinc-400 text-[10px] tracking-widest uppercase mb-2">Drinkware</p>
             <h3 class="text-lg text-zinc-900 mb-2">
               <a href="/products/{{ product.handle }}" class="hover:text-zinc-600 transition-colors">
-                {{ product.handle | default: 'Aurelia Crystal Flute' }}
+                {{ product.title | default: 'Aurelia Crystal Flute' }}
               </a>
             </h3>
             <p class="font-medium text-zinc-700 font-sans tracking-wide" aria-label="Price">$45.00</p>
