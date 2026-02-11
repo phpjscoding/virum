@@ -23,17 +23,19 @@
     <!-- Product Grid -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12" role="list">
       <!-- Product 1: Aurelia Crystal Flute -->
-      {% for product in section.blocks %}
-        <article class="flex-col group" role="listitem">
+      {% for block in section.blocks %}
+        {% assign product = block.settings.product %}
+
+        <article class="flex-col group" role="listitem" {{ block.shopify_attributes }}>
           <div class="relative aspect-[3/4] overflow-hidden bg-zinc-50 mb-6">
-            <img
-              alt="Aurelia Crystal Flute - elegant crystal champagne flute"
-              class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-              src="https://images.unsplash.com/photo-1517951052671-50e5e01c969b?auto=format&fit=crop&q=80&w=800"
-              loading="lazy"
-              width="280"
-              height="480"
-            >
+            {% if product.featured_image %}
+              {{
+                product.featured_image
+                | image_url: width: 800
+                | image_tag: loading: 'lazy', alt: product.title
+                | escape
+              }}
+            {% endif %}
 
             <!-- Badges -->
             <div class="absolute top-4 left-4 flex flex-col  gap-2" aria-label="Product badges">
@@ -110,17 +112,12 @@
   "blocks": [
     {
       "type": "product",
-      "name": "Trending product",
+      "name": "Product block name",
       "settings": [
-        {
-          "type": "text",
-          "id": "text",
-          "label": "text"
-        },
         {
           "type": "product",
           "id": "product",
-          "label": "Product"
+          "label": "Product label"
         }
       ]
     }
