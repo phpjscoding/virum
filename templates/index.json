@@ -17,6 +17,10 @@
       "type": "featured_collections",
       "settings": {}
     },
+    "features": {
+      "type": "features",
+      "settings": {}
+    },
     "trending": {
       "type": "trending",
       "blocks": {
@@ -58,9 +62,5 @@
       "settings": {}
     }
   },
-  "order": [
-    "main",
-    "featured_collection",
-    "trending"
-  ]
+  "order": ["main", "featured_collection", "trending", "features"]
 }
