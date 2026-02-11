@@ -13,7 +13,19 @@
       "type": "Hero",
       "settings": {}
     },
-    "featured_collection": {
+    "news_letter": {
+      "type": "news_letter",
+      "settings": {}
+    },
+    "about_section": {
+      "type": "about_section",
+      "settings": {}
+    },
+    "spotlight": {
+      "type": "Spotlight_collection",
+      "settings": {}
+    },
+    "featured_collections": {
       "type": "featured_collections",
       "settings": {}
     },
@@ -62,5 +74,13 @@
       "settings": {}
     }
   },
-  "order": ["main", "featured_collection", "trending", "features"]
+  "order": [
+    "main",
+    "featured_collections",
+    "trending",
+    "features",
+    "spotlight",
+    "about_section",
+    "news_letter"
+  ]
 }
