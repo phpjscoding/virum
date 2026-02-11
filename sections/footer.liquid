@@ -1,23 +1,386 @@
-<footer>
-  <div class="footer__copyright">
-    &copy;
-    {{ 'now' | date: '%Y' }}
-    {{ shop.name | link_to: routes.root_url }}, {{ powered_by_link }}
+<footer
+  aria-labelledby="footer-heading"
+  class="bg-white border-t border-zinc-100 pt-24 pb-12"
+>
+  {% comment %}
+    <div class="footer__copyright">
+      &copy;
+      {{ 'now' | date: '%Y' }}
+      {{ shop.name | link_to: routes.root_url }}, {{ powered_by_link }}
+    </div>
+  {% endcomment %}
+
+  <div class="max-w-7xl mx-auto px-4 md:px-8">
+    <!-- Hidden footer heading for screen readers -->
+    <h2 id="footer-heading" class="sr-only">Vitrum footer navigation and information</h2>
+
+    <!-- Main footer navigation -->
+    <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-24">
+      <!-- Shop Section -->
+      <div>
+        <h3 class="text-[10px] font-bold tracking-[0.3em] uppercase text-zinc-900 mb-8">Shop</h3>
+        <ul class="space-y-4 text-sm text-zinc-500 font-sans">
+          <li>
+            <a
+              href="/shop/drinkware"
+              class="hover:text-zinc-900 transition-colors focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:ring-offset-2 inline-block"
+              >Drinkware</a
+            >
+          </li>
+          <li>
+            <a
+              href="/shop/serveware"
+              class="hover:text-zinc-900 transition-colors focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:ring-offset-2 inline-block"
+              >Serveware</a
+            >
+          </li>
+          <li>
+            <a
+              href="/shop/decorative"
+              class="hover:text-zinc-900 transition-colors focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:ring-offset-2 inline-block"
+              >Decorative Glass</a
+            >
+          </li>
+          <li>
+            <a
+              href="/shop/new-arrivals"
+              class="hover:text-zinc-900 transition-colors focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:ring-offset-2 inline-block"
+              >New Arrivals</a
+            >
+          </li>
+          <li>
+            <a
+              href="/shop/sale"
+              class="hover:text-zinc-900 transition-colors focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:ring-offset-2 inline-block"
+              >Sale</a
+            >
+          </li>
+        </ul>
+      </div>
+
+      <!-- Customer Care Section -->
+      <div>
+        <h3 class="text-[10px] font-bold tracking-[0.3em] uppercase text-zinc-900 mb-8">Customer Care</h3>
+        <ul class="space-y-4 text-sm text-zinc-500 font-sans">
+          <li>
+            <a
+              href="/shipping-returns"
+              class="hover:text-zinc-900 transition-colors focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:ring-offset-2 inline-block"
+              >Shipping & Returns</a
+            >
+          </li>
+          <li>
+            <a
+              href="/faq"
+              class="hover:text-zinc-900 transition-colors focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:ring-offset-2 inline-block"
+              >FAQ</a
+            >
+          </li>
+          <li>
+            <a
+              href="/care-instructions"
+              class="hover:text-zinc-900 transition-colors focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:ring-offset-2 inline-block"
+              >Care Instructions</a
+            >
+          </li>
+          <li>
+            <a
+              href="/track-order"
+              class="hover:text-zinc-900 transition-colors focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:ring-offset-2 inline-block"
+              >Track Order</a
+            >
+          </li>
+          <li>
+            <a
+              href="/contact"
+              class="hover:text-zinc-900 transition-colors focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:ring-offset-2 inline-block"
+              >Contact Us</a
+            >
+          </li>
+        </ul>
+      </div>
+
+      <!-- The Brand Section -->
+      <div>
+        <h3 class="text-[10px] font-bold tracking-[0.3em] uppercase text-zinc-900 mb-8">The Brand</h3>
+        <ul class="space-y-4 text-sm text-zinc-500 font-sans">
+          <li>
+            <a
+              href="/our-story"
+              class="hover:text-zinc-900 transition-colors focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:ring-offset-2 inline-block"
+              >Our Story</a
+            >
+          </li>
+          <li>
+            <a
+              href="/sustainability"
+              class="hover:text-zinc-900 transition-colors focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:ring-offset-2 inline-block"
+              >Sustainability</a
+            >
+          </li>
+          <li>
+            <a
+              href="/blog"
+              class="hover:text-zinc-900 transition-colors focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:ring-offset-2 inline-block"
+              >Blog</a
+            >
+          </li>
+          <li>
+            <a
+              href="/careers"
+              class="hover:text-zinc-900 transition-colors focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:ring-offset-2 inline-block"
+              >Careers</a
+            >
+          </li>
+          <li>
+            <a
+              href="/privacy-policy"
+              class="hover:text-zinc-900 transition-colors focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:ring-offset-2 inline-block"
+              >Privacy Policy</a
+            >
+          </li>
+        </ul>
+      </div>
+
+      <!-- Connect Section -->
+      <div>
+        <h3 class="text-[10px] font-bold tracking-[0.3em] uppercase text-zinc-900 mb-8">Connect</h3>
+
+        <!-- Social Media Links -->
+        <div class="flex space-x-6 text-zinc-400 mb-8" role="list" aria-label="Social media channels">
+          <a
+            href="https://instagram.com/vitrum_glass"
+            class="hover:text-zinc-900 transition-colors focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:ring-offset-2"
+            aria-label="Follow us on Instagram"
+            role="listitem"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-instagram"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
+            </svg>
+          </a>
+
+          <a
+            href="https://facebook.com/vitrum_glass"
+            class="hover:text-zinc-900 transition-colors focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:ring-offset-2"
+            aria-label="Follow us on Facebook"
+            role="listitem"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-facebook"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+            </svg>
+          </a>
+
+          <a
+            href="https://pinterest.com/vitrum_glass"
+            class="hover:text-zinc-900 transition-colors focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:ring-offset-2"
+            aria-label="Follow us on Pinterest"
+            role="listitem"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-pinterest"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path d="M8 12.75a10.37 10.37 0 0 0 2.25 4.5 10.37 10.37 0 0 0 4.5 2.25"></path>
+              <path d="M12 2a10 10 0 0 0-3.16 19.47"></path>
+              <path d="M12 2a10 10 0 0 1 3.16 19.47"></path>
+              <line x1="12" x2="12" y1="2" y2="22"></line>
+            </svg>
+          </a>
+
+          <a
+            href="https://twitter.com/vitrum_glass"
+            class="hover:text-zinc-900 transition-colors focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:ring-offset-2"
+            aria-label="Follow us on X (formerly Twitter)"
+            role="listitem"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-twitter"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path>
+            </svg>
+          </a>
+        </div>
+
+        <!-- Newsletter Signup -->
+        <p id="newsletter-description" class="text-sm text-zinc-500 font-sans leading-relaxed">
+          Join our list for exclusive offers and updates.
+        </p>
+
+        <form
+          class="mt-4 flex border-b border-zinc-200 pb-2"
+          aria-labelledby="newsletter-heading"
+          onsubmit="event.preventDefault()"
+        >
+          <h4 id="newsletter-heading" class="sr-only">Newsletter signup</h4>
+
+          <label for="footer-email" class="sr-only"> Email address for newsletter </label>
+          <input
+            id="footer-email"
+            name="email"
+            type="email"
+            inputmode="email"
+            autocomplete="email"
+            placeholder="Email address"
+            class="
+              bg-transparent text-sm w-full outline-none py-1 font-sans
+              focus:ring-2 focus:ring-zinc-900 focus:ring-inset
+              placeholder:text-zinc-400
+            "
+            required
+            aria-required="true"
+            aria-describedby="newsletter-description"
+          >
+
+          <button
+            type="submit"
+            class="
+              text-[10px] font-bold tracking-widest uppercase
+              hover:text-zinc-900 transition-colors
+              focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:ring-offset-2
+            "
+            aria-label="Subscribe to newsletter"
+          >
+            Join
+          </button>
+        </form>
+
+        <!-- Hidden status for newsletter submission -->
+        <div id="newsletter-status" class="sr-only" role="status" aria-live="polite"></div>
+      </div>
+    </div>
+
+    <!-- Bottom Footer -->
+    <div class="flex flex-col md:flex-row items-center justify-between pt-12 border-t border-zinc-100 gap-6 text-zinc-400 text-[10px] tracking-[0.2em] uppercase font-bold">
+      <div class="flex flex-col md:flex-row items-center gap-6">
+        <span>© 2024 Vitrum Studio. All rights reserved.</span>
+
+        <div class="flex gap-6" role="list" aria-label="Legal links">
+          <a
+            href="/terms"
+            class="hover:text-zinc-900 transition-colors focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:ring-offset-2"
+            role="listitem"
+          >
+            Terms
+          </a>
+          <a
+            href="/privacy"
+            class="hover:text-zinc-900 transition-colors focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:ring-offset-2"
+            role="listitem"
+          >
+            Privacy
+          </a>
+          <a
+            href="/accessibility"
+            class="hover:text-zinc-900 transition-colors focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:ring-offset-2 md:hidden lg:inline"
+            role="listitem"
+          >
+            Accessibility
+          </a>
+        </div>
+      </div>
+
+      <!-- Payment Methods -->
+      <div class="flex items-center gap-4" aria-label="Accepted payment methods">
+        <span class="border border-zinc-200 px-2 py-0.5 rounded text-[8px] font-normal" aria-label="Visa">VISA</span>
+        <span class="border border-zinc-200 px-2 py-0.5 rounded text-[8px] font-normal" aria-label="Mastercard"
+          >MC</span
+        >
+        <span class="border border-zinc-200 px-2 py-0.5 rounded text-[8px] font-normal" aria-label="American Express"
+          >AMEX</span
+        >
+        <span class="border border-zinc-200 px-2 py-0.5 rounded text-[8px] font-normal" aria-label="PayPal"
+          >PAYPAL</span
+        >
+        <span class="border border-zinc-200 px-2 py-0.5 rounded text-[8px] font-normal" aria-label="Apple Pay"
+          >APPLE</span
+        >
+      </div>
+    </div>
+
+    <!-- Hidden skip to top link -->
+    <div class="mt-8 text-center md:hidden">
+      <a
+        href="#main-content"
+        class="
+          text-[10px] tracking-widest uppercase text-zinc-400 hover:text-zinc-900
+          focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:ring-offset-2 inline-block p-2
+        "
+      >
+        Back to top
+      </a>
+    </div>
   </div>
 
-  <div class="footer__links">
-    {% for link in section.settings.menu.links %}
-      {{ link.title | link_to: link.url }}
-    {% endfor %}
-  </div>
-
-  <div class="footer__payment">
-    {% if section.settings.show_payment_icons %}
-      {% for type in shop.enabled_payment_types %}
-        {{ type | payment_type_svg_tag }}
-      {% endfor %}
-    {% endif %}
-  </div>
+  <!-- Schema.org markup for organization -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Vitrum Studio",
+      "url": "https://vitrumstudio.com",
+      "logo": "https://vitrumstudio.com/logo.png",
+      "sameAs": [
+        "https://instagram.com/vitrum_glass",
+        "https://facebook.com/vitrum_glass",
+        "https://pinterest.com/vitrum_glass",
+        "https://twitter.com/vitrum_glass"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer service",
+        "url": "https://vitrumstudio.com/contact"
+      }
+    }
+  </script>
 </footer>
 
 {% stylesheet %}
