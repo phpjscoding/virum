@@ -2,99 +2,74 @@
   <div class="max-w-7xl mx-auto px-4 md:px-8">
     <!-- Testimonials Section Header -->
     <div class="text-center mb-24">
-      <span class="text-zinc-500 text-[10px] font-bold tracking-[0.4em] uppercase mb-4 block" id="testimonials-eyebrow"
-        >Client Stories</span
-      >
-      <h2 id="testimonials-heading" class="text-4xl md:text-5xl text-zinc-900 italic mb-16">Trusted by Connoisseurs</h2>
+      <span class="text-zinc-500 text-[10px] font-bold tracking-[0.4em] uppercase mb-4 block" id="testimonials-eyebrow">
+        {{ section.settings.eyebrow_text }}
+      </span>
+      <h2 id="testimonials-heading" class="text-4xl md:text-5xl text-zinc-900 italic mb-16">
+        {{ section.settings.heading }}
+      </h2>
 
       <!-- Testimonials Grid -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
-        <!-- Testimonial 1 -->
-        <article class="p-8 border border-zinc-50 flex flex-col items-center text-center">
-          <div class="flex gap-1 mb-6" aria-label="5 out of 5 stars">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="14"
-              height="14"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="lucide lucide-star text-zinc-900"
-              aria-hidden="true"
-              focusable="false"
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'testimonial' -%}
+            <article
+              class="p-8 border border-zinc-50 flex flex-col items-center text-center"
+              {{ block.shopify_attributes }}
             >
-              <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path>
-            </svg>
-            <!-- Repeated stars with same pattern, condensed for brevity -->
-            <span class="sr-only">5 out of 5 stars</span>
-          </div>
+              <div class="flex gap-1 mb-6" aria-label="{{ block.settings.star_rating }} out of 5 stars">
+                {%- for i in (1..5) -%}
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-star {% if i <= block.settings.star_rating %}text-zinc-900{% else %}text-zinc-200{% endif %}"
+                    aria-hidden="true"
+                    focusable="false"
+                  >
+                    <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path>
+                  </svg>
+                {%- endfor -%}
+                <span class="sr-only">{{ block.settings.star_rating }} out of 5 stars</span>
+              </div>
 
-          <p class="text-zinc-700 font-serif text-xl italic mb-8 leading-relaxed">
-            "The clarity of the glasses is unlike anything I've owned. They truly make the simplest table setting look
-            extraordinary."
-          </p>
+              <p class="text-zinc-700 font-serif text-xl italic mb-8 leading-relaxed">"{{ block.settings.quote }}"</p>
 
-          <footer class="mt-auto">
-            <cite class="not-italic">
-              <h3 class="text-xs font-bold tracking-widest uppercase text-zinc-900 mb-1">Eleanor Vance</h3>
-              <p class="text-zinc-400 text-[10px] tracking-widest uppercase">San Francisco</p>
-            </cite>
-          </footer>
-        </article>
-
-        <!-- Testimonial 2 -->
-        <article class="p-8 border border-zinc-50 flex flex-col items-center text-center">
-          <div class="flex gap-1 mb-6" aria-label="5 out of 5 stars">
-            <!-- Star icons same as above -->
-            <span class="sr-only">5 out of 5 stars</span>
-          </div>
-
-          <p class="text-zinc-700 font-serif text-xl italic mb-8 leading-relaxed">
-            "Impeccable packaging. I was worried about shipping such delicate items, but they arrived in perfect
-            condition."
-          </p>
-
-          <footer class="mt-auto">
-            <cite class="not-italic">
-              <h3 class="text-xs font-bold tracking-widest uppercase text-zinc-900 mb-1">Markus Weber</h3>
-              <p class="text-zinc-400 text-[10px] tracking-widest uppercase">Munich</p>
-            </cite>
-          </footer>
-        </article>
-
-        <!-- Testimonial 3 -->
-        <article class="p-8 border border-zinc-50 flex flex-col items-center text-center">
-          <div class="flex gap-1 mb-6" aria-label="5 out of 5 stars">
-            <!-- Star icons same as above -->
-            <span class="sr-only">5 out of 5 stars</span>
-          </div>
-
-          <p class="text-zinc-700 font-serif text-xl italic mb-8 leading-relaxed">
-            "Heirloom quality. These are the kind of pieces you pass down to your children. Worth every penny."
-          </p>
-
-          <footer class="mt-auto">
-            <cite class="not-italic">
-              <h3 class="text-xs font-bold tracking-widest uppercase text-zinc-900 mb-1">Julianne Moore</h3>
-              <p class="text-zinc-400 text-[10px] tracking-widest uppercase">New York</p>
-            </cite>
-          </footer>
-        </article>
+              <footer class="mt-auto">
+                <cite class="not-italic">
+                  <h3 class="text-xs font-bold tracking-widest uppercase text-zinc-900 mb-1">
+                    {{ block.settings.author_name }}
+                  </h3>
+                  <p class="text-zinc-400 text-[10px] tracking-widest uppercase">
+                    {{ block.settings.author_location }}
+                  </p>
+                </cite>
+              </footer>
+            </article>
+          {%- endif -%}
+        {%- endfor -%}
       </div>
     </div>
 
     <!-- Instagram Gallery Section -->
     <div class="pt-12 border-t border-zinc-100" aria-labelledby="gallery-heading">
       <div class="flex items-center justify-between flex-wrap gap-4 mb-12">
-        <h2 id="gallery-heading" class="text-2xl text-zinc-900 italic">In Your Homes</h2>
+        <h2 id="gallery-heading" class="text-2xl text-zinc-900 italic">
+          {{ section.settings.gallery_heading }}
+        </h2>
 
         <a
-          href="#"
+          href="{{ section.settings.instagram_url }}"
           class="flex items-center gap-2 text-[10px] font-bold tracking-widest uppercase hover:text-zinc-500 transition-colors focus:outline-none focus:ring-2 focus:ring-zinc-500 focus:ring-offset-2"
-          aria-label="Follow us on Instagram @Vitrum_Glass"
+          aria-label="Follow us on Instagram {{ section.settings.instagram_handle }}"
+          target="_blank"
+          rel="noopener noreferrer"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -114,129 +89,227 @@
             <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
             <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
           </svg>
-          <span>@Vitrum_Glass</span>
+          <span>{{ section.settings.instagram_handle }}</span>
         </a>
       </div>
 
       <!-- Gallery Grid -->
       <ul class="grid grid-cols-2 md:grid-cols-5 gap-4" role="list">
-        <li class="aspect-square group overflow-hidden relative">
-          <figure class="relative w-full h-full cursor-pointer" role="figure">
-            <img
-              src="https://images.unsplash.com/photo-1544967082-d9d25d867d66?auto=format&fit=crop&q=80&w=400"
-              alt="Elegant crystal glassware on a wooden table with natural light"
-              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-              loading="lazy"
-              width="400"
-              height="400"
-            >
-            <figcaption class="sr-only">Customer photo showing Vitrum glassware in a home setting</figcaption>
-            <div
-              class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center"
-              aria-hidden="true"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="lucide lucide-instagram text-white"
-                aria-hidden="true"
-                focusable="false"
-              >
-                <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
-                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
-              </svg>
-            </div>
-          </figure>
-        </li>
-
-        <li class="aspect-square group overflow-hidden relative">
-          <figure class="relative w-full h-full cursor-pointer">
-            <img
-              src="https://images.unsplash.com/photo-1516594915697-87eb3b1c14ea?auto=format&fit=crop&q=80&w=400"
-              alt="Wine glasses catching sunlight on a marble countertop"
-              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-              loading="lazy"
-              width="400"
-              height="400"
-            >
-            <figcaption class="sr-only">Customer photo featuring Vitrum wine glasses</figcaption>
-            <div
-              class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center"
-              aria-hidden="true"
-            >
-              <!-- Instagram icon same as above -->
-            </div>
-          </figure>
-        </li>
-
-        <li class="aspect-square group overflow-hidden relative">
-          <figure class="relative w-full h-full cursor-pointer">
-            <img
-              src="https://images.unsplash.com/photo-1510076857177-7470076d4098?auto=format&fit=crop&q=80&w=400"
-              alt="Modern glass decanter set on dining table"
-              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-              loading="lazy"
-              width="400"
-              height="400"
-            >
-            <figcaption class="sr-only">Customer's Vitrum glassware collection displayed elegantly</figcaption>
-            <div
-              class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center"
-              aria-hidden="true"
-            >
-              <!-- Instagram icon same as above -->
-            </div>
-          </figure>
-        </li>
-
-        <li class="aspect-square group overflow-hidden relative">
-          <figure class="relative w-full h-full cursor-pointer">
-            <img
-              src="https://images.unsplash.com/photo-1581781870027-04212e231e96?auto=format&fit=crop&q=80&w=400"
-              alt="Champagne flutes arranged beautifully for a celebration"
-              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-              loading="lazy"
-              width="400"
-              height="400"
-            >
-            <figcaption class="sr-only">Customer celebrating with Vitrum champagne flutes</figcaption>
-            <div
-              class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center"
-              aria-hidden="true"
-            >
-              <!-- Instagram icon same as above -->
-            </div>
-          </figure>
-        </li>
-
-        <li class="aspect-square group overflow-hidden relative">
-          <figure class="relative w-full h-full cursor-pointer">
-            <img
-              src="https://images.unsplash.com/photo-1574936144220-3023812f8624?auto=format&fit=crop&q=80&w=400"
-              alt="Water glasses on minimalist shelf with plants"
-              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-              loading="lazy"
-              width="400"
-              height="400"
-            >
-            <figcaption class="sr-only">Vitrum glassware displayed in a modern home interior</figcaption>
-            <div
-              class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center"
-              aria-hidden="true"
-            >
-              <!-- Instagram icon same as above -->
-            </div>
-          </figure>
-        </li>
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'gallery_image' -%}
+            <li class="aspect-square group overflow-hidden relative" {{ block.shopify_attributes }}>
+              <figure class="relative w-full h-full cursor-pointer" role="figure">
+                <img
+                  src="{{ block.settings.image | image_url: width: 400 }}"
+                  alt="{{ block.settings.image_alt }}"
+                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  loading="lazy"
+                  width="400"
+                  height="400"
+                >
+                <figcaption class="sr-only">{{ block.settings.image_caption }}</figcaption>
+                <div
+                  class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center"
+                  aria-hidden="true"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-instagram text-white"
+                    aria-hidden="true"
+                    focusable="false"
+                  >
+                    <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                    <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
+                  </svg>
+                </div>
+              </figure>
+            </li>
+          {%- endif -%}
+        {%- endfor -%}
       </ul>
     </div>
   </div>
 </section>
+
+{% schema %}
+{
+  "name": "Testimonials & Gallery",
+  "tag": "section",
+  "class": "testimonials-gallery-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Testimonials Header"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow_text",
+      "label": "Eyebrow Text",
+      "default": "Client Stories"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section Heading",
+      "default": "Trusted by Connoisseurs"
+    },
+    {
+      "type": "header",
+      "content": "Instagram Gallery"
+    },
+    {
+      "type": "text",
+      "id": "gallery_heading",
+      "label": "Gallery Heading",
+      "default": "In Your Homes"
+    },
+    {
+      "type": "text",
+      "id": "instagram_handle",
+      "label": "Instagram Handle",
+      "default": "@Vitrum_Glass"
+    },
+    {
+      "type": "url",
+      "id": "instagram_url",
+      "label": "Instagram Profile URL"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "type": "range",
+          "id": "star_rating",
+          "label": "Star Rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 5
+        },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Quote",
+          "default": "The clarity of the glasses is unlike anything I've owned. They truly make the simplest table setting look extraordinary."
+        },
+        {
+          "type": "text",
+          "id": "author_name",
+          "label": "Author Name",
+          "default": "Eleanor Vance"
+        },
+        {
+          "type": "text",
+          "id": "author_location",
+          "label": "Author Location",
+          "default": "San Francisco"
+        }
+      ]
+    },
+    {
+      "type": "gallery_image",
+      "name": "Gallery Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "image_alt",
+          "label": "Image Alt Text",
+          "default": "Customer photo featuring Vitrum glassware"
+        },
+        {
+          "type": "text",
+          "id": "image_caption",
+          "label": "Screen Reader Caption",
+          "default": "Customer photo showing Vitrum glassware in a home setting"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Testimonials & Gallery",
+      "blocks": [
+        {
+          "type": "testimonial",
+          "settings": {
+            "star_rating": 5,
+            "quote": "The clarity of the glasses is unlike anything I've owned. They truly make the simplest table setting look extraordinary.",
+            "author_name": "Eleanor Vance",
+            "author_location": "San Francisco"
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "star_rating": 5,
+            "quote": "Impeccable packaging. I was worried about shipping such delicate items, but they arrived in perfect condition.",
+            "author_name": "Markus Weber",
+            "author_location": "Munich"
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "star_rating": 5,
+            "quote": "Heirloom quality. These are the kind of pieces you pass down to your children. Worth every penny.",
+            "author_name": "Julianne Moore",
+            "author_location": "New York"
+          }
+        },
+        {
+          "type": "gallery_image",
+          "settings": {
+            "image_alt": "Elegant crystal glassware on a wooden table with natural light",
+            "image_caption": "Customer photo showing Vitrum glassware in a home setting"
+          }
+        },
+        {
+          "type": "gallery_image",
+          "settings": {
+            "image_alt": "Wine glasses catching sunlight on a marble countertop",
+            "image_caption": "Customer photo featuring Vitrum wine glasses"
+          }
+        },
+        {
+          "type": "gallery_image",
+          "settings": {
+            "image_alt": "Modern glass decanter set on dining table",
+            "image_caption": "Customer's Vitrum glassware collection displayed elegantly"
+          }
+        },
+        {
+          "type": "gallery_image",
+          "settings": {
+            "image_alt": "Champagne flutes arranged beautifully for a celebration",
+            "image_caption": "Customer celebrating with Vitrum champagne flutes"
+          }
+        },
+        {
+          "type": "gallery_image",
+          "settings": {
+            "image_alt": "Water glasses on minimalist shelf with plants",
+            "image_caption": "Vitrum glassware displayed in a modern home interior"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
