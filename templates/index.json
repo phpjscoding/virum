@@ -11,7 +11,20 @@
   "sections": {
     "main": {
       "type": "Hero",
-      "settings": {}
+      "settings": {
+        "background_image": "shopify://shop_images/make-it-closer-to-view.png",
+        "background_image_alt": "Artisanal glass collection background",
+        "eyebrow_text": "Artisanal Brilliance",
+        "heading": "<p>Elevate Every<br/><em>Moment</em></p>",
+        "description": "Handpicked glass collections for your home and table. Where master craftsmanship meets modern clarity.",
+        "primary_button_label": "Shop the Collection",
+        "primary_button_url": "shopify://collections/all",
+        "primary_button_aria": "Shop the full collection",
+        "secondary_button_label": "Explore Collections",
+        "secondary_button_url": "shopify://collections",
+        "secondary_button_aria": "Explore all collections",
+        "aria_label": "Hero banner"
+      }
     },
     "featured_collections": {
       "type": "featured_collections",
@@ -109,7 +122,22 @@
     },
     "news_letter": {
       "type": "news_letter",
-      "settings": {}
+      "settings": {
+        "eyebrow": "The Vitrum Journal",
+        "heading": "Join Our Inner Circle",
+        "description": "Sign up to receive collection previews, artisan stories, and 10% off your first order.",
+        "email_placeholder": "Enter your email address",
+        "email_label": "Email address for newsletter subscription",
+        "email_hint": "Please enter a valid email address, like name@example.com",
+        "button_label": "Subscribe",
+        "button_aria_label": "Subscribe to newsletter",
+        "success_message": "Thank you for subscribing! Check your inbox for a confirmation email.",
+        "privacy_note": "No spam. Only beauty. Unsubscribe at any time.",
+        "privacy_aria_label": "Privacy assurance",
+        "background_color": "#1a1a1a",
+        "button_background": "#ffffff",
+        "button_text_color": "#18181b"
+      }
     }
   },
   "order": [
