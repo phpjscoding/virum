@@ -5,79 +5,186 @@
   https://shopify.dev/docs/storefronts/themes/architecture/templates/collection
 {% endcomment %}
 
-<h1>{{ 'collections.title' | t }}</h1>
-
-<div
-  class="collections {{ section.settings.grid_item_width }}"
-  style="--grid-gap: {{ section.settings.grid_gap }}px"
->
-  {% for collection in collections %}
-    <a class="collection-card" href="{{ collection.url }}">
-      {% if collection.featured_image %}
-        {% render 'image',
-          class: 'collection-card__image',
-          image: collection.featured_image,
-          width: 600,
-          height: 600,
-          crop: 'center'
-        %}
-      {% endif %}
-
-      <div class="collection-card__content">
-        <p>{{ collection.title }}</p>
-
-        {% if collection.description %}
-          <p>{{ collection.description | strip_html | truncatewords: 15 }}</p>
+{% comment %}
+  <div
+    class="collections {{ section.settings.grid_item_width }}"
+    style="--grid-gap: {{ section.settings.grid_gap }}px"
+  >
+    {% for collection in collections %}
+      <a class="collection-card" href="{{ collection.url }}">
+        {% if collection.featured_image %}
+          {% render 'image',
+            class: 'collection-card__image',
+            image: collection.featured_image,
+            width: 600,
+            height: 600,
+            crop: 'center'
+          %}
         {% endif %}
+
+        <div class="collection-card__content">
+          <p>{{ collection.title }}</p>
+
+          {% if collection.description %}
+            <p>{{ collection.description | strip_html | truncatewords: 15 }}</p>
+          {% endif %}
+        </div>
+      </a>
+    {% endfor %}
+  </div>
+{% endcomment %}
+<section class="pt-32 pb-24 bg-white" aria-label="Product detail">
+  <div class="max-w-7xl mx-auto px-4 md:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
+      <!-- Product Gallery -->
+      <div class="lg:col-span-7">
+        <figure class="aspect-[4/5] bg-zinc-100 overflow-hidden mb-4">
+          <img
+            src="https://images.unsplash.com/photo-1517951052671-50e5e01c969b?auto=format&amp;fit=crop&amp;q=80&amp;w=800"
+            alt="Aurelia Crystal Flute - Main product view showing elegant crystal champagne flute"
+            class="w-full h-full object-cover"
+            width="400"
+            height="499"
+          >
+        </figure>
+
+        <!-- Thumbnail Gallery -->
+        <div class="grid grid-cols-4 gap-4" role="region" aria-label="Product image thumbnails">
+          <button
+            class="aspect-square bg-zinc-100 overflow-hidden focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:ring-offset-2 hover:opacity-90 transition-opacity"
+            aria-label="View main product image"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1517951052671-50e5e01c969b?auto=format&amp;fit=crop&amp;q=80&amp;w=800"
+              alt="Aurelia Crystal Flute - Main view"
+              class="w-full h-full object-cover"
+              width="400"
+              height="499"
+            >
+          </button>
+          <button
+            class="aspect-square bg-zinc-100 overflow-hidden focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:ring-offset-2 hover:opacity-90 transition-opacity"
+            aria-label="View alternative angle of Aurelia Crystal Flute"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1574936144220-3023812f8624?auto=format&amp;fit=crop&amp;q=80&amp;w=800"
+              alt="Aurelia Crystal Flute - Side view"
+              class="w-full h-full object-cover"
+              width="400"
+              height="499"
+            >
+          </button>
+          <button
+            class="aspect-square bg-zinc-100 overflow-hidden focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:ring-offset-2 hover:opacity-90 transition-opacity"
+            aria-label="View close-up detail of Aurelia Crystal Flute"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1516594915697-87eb3b1c14ea?auto=format&amp;fit=crop&amp;q=80&amp;w=800"
+              alt="Aurelia Crystal Flute - Close-up detail of crystal pattern"
+              class="w-full h-full object-cover"
+              width="400"
+              height="499"
+            >
+          </button>
+          <button
+            class="aspect-square bg-zinc-100 overflow-hidden focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:ring-offset-2 hover:opacity-90 transition-opacity"
+            aria-label="View product packaging of Aurelia Crystal Flute"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1544967082-d9d25d867d66?auto=format&amp;fit=crop&amp;q=80&amp;w=800"
+              alt="Aurelia Crystal Flute - Elegant packaging presentation"
+              class="w-full h-full object-cover"
+              width="400"
+              height="499"
+            >
+          </button>
+        </div>
       </div>
-    </a>
-  {% endfor %}
-</div>
 
-{% stylesheet %}
-  .collections {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(var(--collection-card-size), 100%), 1fr));
-    gap: var(--grid-gap);
-  }
-  .collections--compact {
-    --collection-card-size: 160px;
-  }
-  .collections--full {
-    --collection-card-size: 280px;
-  }
-  .collection-card {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-  }
-{% endstylesheet %}
+      <!-- Product Information -->
+      <div class="lg:col-span-5 flex flex-col justify-center">
+        <p class="text-zinc-400 text-[10px] uppercase font-bold tracking-widest mb-4" aria-label="Category">
+          <span class="sr-only">Product category: </span>Drinkware
+        </p>
 
-{% schema %}
-{
-  "name": "t:general.collections_grid",
-  "settings": [
-    {
-      "type": "select",
-      "id": "grid_item_width",
-      "label": "t:labels.grid_item_width",
-      "options": [
-        { "value": "collections--compact", "label": "t:options.size.small" },
-        { "value": "collections--full", "label": "t:options.size.large" }
-      ],
-      "default": "collections--full"
-    },
-    {
-      "type": "range",
-      "id": "grid_gap",
-      "label": "t:labels.grid_gap",
-      "min": 0,
-      "max": 50,
-      "step": 5,
-      "unit": "px",
-      "default": 10
-    }
-  ],
-  "presets": [{ "name": "t:general.collections_grid" }]
-}
-{% endschema %}
+        <h1 class="text-5xl font-serif mb-8" id="product-title">Aurelia Crystal Flute</h1>
+
+        <p class="text-3xl font-light mb-8">
+          <span class="sr-only">Price:</span>
+          <span aria-label="$45.00 USD">$45.00</span>
+        </p>
+
+        <blockquote class="text-zinc-600 text-lg italic leading-relaxed mb-12 border-l-2 border-zinc-100 pl-6">
+          <p>Elevate your champagne service with the Aurelia Crystal Flute. Hand-blown from lead-free crystal.</p>
+        </blockquote>
+
+        <div class="space-y-6 mb-12">
+          <!-- Set Size Selection -->
+          <fieldset>
+            <legend class="text-[10px] font-bold uppercase tracking-widest block mb-3">
+              Set Size
+              <span class="sr-only">(required)</span>
+            </legend>
+
+            <div class="flex gap-2" role="radiogroup" aria-label="Set size options">
+              <label class="flex-1 min-w-[80px]">
+                <input
+                  type="radio"
+                  name="set-size"
+                  value="set-of-1"
+                  class="sr-only peer"
+                  checked
+                  aria-describedby="size-description"
+                >
+                <span class="block px-4 py-2 border border-zinc-900 bg-zinc-900 text-white text-[10px] font-bold uppercase text-center cursor-pointer peer-checked:ring-2 peer-checked:ring-zinc-900 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-zinc-900 peer-focus:ring-offset-2">
+                  Set of 1
+                </span>
+              </label>
+
+              <label class="flex-1 min-w-[80px]">
+                <input
+                  type="radio"
+                  name="set-size"
+                  value="set-of-4"
+                  class="sr-only peer"
+                  aria-describedby="size-description"
+                >
+                <span class="block px-4 py-2 border border-zinc-200 text-[10px] font-bold uppercase text-center cursor-pointer hover:border-zinc-900 transition-colors peer-checked:border-zinc-900 peer-checked:bg-zinc-900 peer-checked:text-white peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-zinc-900 peer-focus:ring-offset-2">
+                  Set of 4
+                </span>
+              </label>
+
+              <label class="flex-1 min-w-[80px]">
+                <input
+                  type="radio"
+                  name="set-size"
+                  value="set-of-6"
+                  class="sr-only peer"
+                  aria-describedby="size-description"
+                >
+                <span class="block px-4 py-2 border border-zinc-200 text-[10px] font-bold uppercase text-center cursor-pointer hover:border-zinc-900 transition-colors peer-checked:border-zinc-900 peer-checked:bg-zinc-900 peer-checked:text-white peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-zinc-900 peer-focus:ring-offset-2">
+                  Set of 6
+                </span>
+              </label>
+            </div>
+            <p class="sr-only" id="size-description">Select the number of glasses in your set</p>
+          </fieldset>
+
+          <!-- Add to Cart Button -->
+          <button
+            onclick="addToCart('p1')"
+            class="w-full py-5 bg-zinc-900 text-white font-bold uppercase text-xs tracking-widest hover:bg-zinc-800 transition-all focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:ring-offset-2"
+            aria-label="Add Aurelia Crystal Flute to shopping bag"
+          >
+            Add to Bag
+          </button>
+        </div>
+
+        <!-- Additional accessibility information -->
+        <div class="text-xs text-zinc-500 mt-4" role="note" aria-label="Product details">
+          <p class="sr-only">Product SKU: Available in sets of 1, 4, or 6 glasses</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
