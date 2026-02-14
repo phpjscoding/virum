@@ -1,0 +1,107 @@
+{% schema %}
+{
+  "name": "Collection Banner",
+  "tag": "section",
+  "class": "section-collection-banner",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background Image"
+    },
+    {
+      "type": "range",
+      "id": "image_opacity",
+      "label": "Image Opacity",
+      "min": 10,
+      "max": 100,
+      "step": 5,
+      "default": 40,
+      "unit": "%"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow_text",
+      "label": "Eyebrow Label",
+      "default": "Hand-Picked Selections"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Artisan Drinkware"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Elevate your tabletop with our signature collection of hand-blown vessels, designed for clarity and balance."
+    },
+    {
+      "type": "range",
+      "id": "section_height",
+      "label": "Section Height (vh)",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "default": 40,
+      "unit": "vh"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collection Banner"
+    }
+  ]
+}
+{% endschema %}
+
+<section
+  class="relative bg-zinc-900 overflow-hidden flex items-center justify-center text-center px-4"
+  style="height: {{ section.settings.section_height }}vh;"
+  aria-labelledby="banner-heading-{{ section.id }}"
+>
+  {%- if section.settings.background_image != blank -%}
+    <img
+      src="{{ section.settings.background_image | image_url: width: 1600 }}"
+      alt="{{ section.settings.background_image.alt | escape }}"
+      class="absolute inset-0 w-full h-full object-cover"
+      style="opacity: {{ section.settings.image_opacity | divided_by: 100.0 }};"
+      width="{{ section.settings.background_image.width }}"
+      height="{{ section.settings.background_image.height }}"
+      loading="lazy"
+      role="presentation"
+    >
+  {%- else -%}
+    <img
+      src="https://images.unsplash.com/photo-1574936145840-28808d77a0b6?auto=format&fit=crop&q=80&w=1600"
+      alt=""
+      class="absolute inset-0 w-full h-full object-cover"
+      style="opacity: {{ section.settings.image_opacity | divided_by: 100.0 }};"
+      role="presentation"
+      width="1600"
+      height="1067"
+    >
+  {%- endif -%}
+
+  <div class="relative z-10 text-white">
+    {%- if section.settings.eyebrow_text != blank -%}
+      <p class="text-[10px] font-bold tracking-[0.4em] uppercase mb-4 opacity-70">
+        <span class="sr-only">Collection theme: </span>
+        {{ section.settings.eyebrow_text }}
+      </p>
+    {%- endif -%}
+
+    {%- if section.settings.heading != blank -%}
+      <h1 id="banner-heading-{{ section.id }}" class="text-5xl md:text-6xl lg:text-7xl italic font-serif mb-6">
+        {{ section.settings.heading }}
+      </h1>
+    {%- endif -%}
+
+    {%- if section.settings.subheading != blank -%}
+      <p class="max-w-xl mx-auto text-lg text-white/60 font-light leading-relaxed">
+        {{ section.settings.subheading }}
+      </p>
+    {%- endif -%}
+  </div>
+</section>
