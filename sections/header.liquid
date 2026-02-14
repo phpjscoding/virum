@@ -80,7 +80,9 @@
                 {{ 'arrow-down.svg' | inline_asset_content }}
               </button>
             {% else %}
-              <a href="" class="hover:text-zinc-900 transition-colors lowercase tracking-widest"> {{ link.title }}</a>
+              <a href="{{ link.url }}" class="hover:text-zinc-900 transition-colors lowercase tracking-widest">
+                {{ link.title -}}
+              </a>
             {% endif %}
             {% if link.links.size > 0 %}
               <ul class="is-dropdown">
