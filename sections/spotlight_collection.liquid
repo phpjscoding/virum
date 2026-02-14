@@ -1,83 +1,307 @@
 <section class="py-24 bg-[#f8f8f8] overflow-hidden" aria-labelledby="spotlight-heading">
   <div class="max-w-7xl mx-auto px-4 md:px-8">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      {%- comment -%} ── Gallery column ── {%- endcomment -%}
       <div
         class="grid grid-cols-2 gap-4"
         role="img"
-        aria-label="Gallery showcasing The Winter Lumina Series glassware collection"
+        aria-label="{{ section.settings.gallery_aria_label | escape }}"
       >
+        {%- comment -%} Left sub-column: tall image + square image {%- endcomment -%}
         <div class="space-y-4 pt-12">
           <div class="aspect-[3/4] overflow-hidden">
-            <img
-              alt="Close-up of textured crystal glass detail showing light refraction"
-              class="w-full h-full object-cover hover:scale-110 transition-transform duration-[2000ms]"
-              src="https://images.unsplash.com/photo-1544967082-d9d25d867d66?auto=format&fit=crop&q=80&w=600"
-              loading="lazy"
-              width="400"
-              height="533"
-            >
+            {%- if section.settings.image_1 != blank -%}
+              {{
+                section.settings.image_1
+                | image_url: width: 600
+                | image_tag:
+                  alt: section.settings.image_1_alt,
+                  class: 'w-full h-full object-cover hover:scale-110 transition-transform duration-[2000ms]',
+                  loading: 'lazy',
+                  width: 400,
+                  height: 533
+              }}
+            {%- else -%}
+              <img
+                alt="{{ section.settings.image_1_alt | escape }}"
+                class="w-full h-full object-cover hover:scale-110 transition-transform duration-[2000ms]"
+                src="{{ section.settings.image_1_url }}"
+                loading="lazy"
+                width="400"
+                height="533"
+              >
+            {%- endif -%}
           </div>
           <div class="aspect-square overflow-hidden">
-            <img
-              alt="Hand-blown crystal glass pitcher from Bavaria"
-              class="w-full h-full object-cover hover:scale-110 transition-transform duration-[2000ms]"
-              src="https://images.unsplash.com/photo-1510076857177-7470076d4098?auto=format&fit=crop&q=80&w=600"
-              loading="lazy"
-              width="400"
-              height="533"
-            >
+            {%- if section.settings.image_2 != blank -%}
+              {{
+                section.settings.image_2
+                | image_url: width: 600
+                | image_tag:
+                  alt: section.settings.image_2_alt,
+                  class: 'w-full h-full object-cover hover:scale-110 transition-transform duration-[2000ms]',
+                  loading: 'lazy',
+                  width: 400,
+                  height: 533
+              }}
+            {%- else -%}
+              <img
+                alt="{{ section.settings.image_2_alt | escape }}"
+                class="w-full h-full object-cover hover:scale-110 transition-transform duration-[2000ms]"
+                src="{{ section.settings.image_2_url }}"
+                loading="lazy"
+                width="400"
+                height="533"
+              >
+            {%- endif -%}
           </div>
         </div>
+
+        {%- comment -%} Right sub-column: tall image + quote card {%- endcomment -%}
         <div class="space-y-4">
           <div class="aspect-[3/4] overflow-hidden">
-            <img
-              alt="Elegant stemware with diamond-cut texture pattern"
-              class="w-full h-full object-cover hover:scale-110 transition-transform duration-[2000ms]"
-              src="https://images.unsplash.com/photo-1574936144220-3023812f8624?auto=format&fit=crop&q=80&w=600"
-              loading="lazy"
-              width="400"
-              height="533"
-            >
+            {%- if section.settings.image_3 != blank -%}
+              {{
+                section.settings.image_3
+                | image_url: width: 600
+                | image_tag:
+                  alt: section.settings.image_3_alt,
+                  class: 'w-full h-full object-cover hover:scale-110 transition-transform duration-[2000ms]',
+                  loading: 'lazy',
+                  width: 400,
+                  height: 533
+              }}
+            {%- else -%}
+              <img
+                alt="{{ section.settings.image_3_alt | escape }}"
+                class="w-full h-full object-cover hover:scale-110 transition-transform duration-[2000ms]"
+                src="{{ section.settings.image_3_url }}"
+                loading="lazy"
+                width="400"
+                height="533"
+              >
+            {%- endif -%}
           </div>
           <div class="bg-zinc-900 aspect-square flex items-center justify-center text-center p-8">
             <blockquote class="text-white font-serif italic text-2xl">
-              <p>"Light and glass create the soul of a home."</p>
+              <p>{{ section.settings.quote_text }}</p>
             </blockquote>
           </div>
         </div>
       </div>
+
+      {%- comment -%} ── Content column ── {%- endcomment -%}
       <div class="lg:pl-12">
-        <p class="text-zinc-500 text-[10px] font-bold tracking-[0.4em] uppercase mb-6">Featured Spotlight</p>
+        <p class="text-zinc-500 text-[10px] font-bold tracking-[0.4em] uppercase mb-6">
+          {{ section.settings.eyebrow_text }}
+        </p>
         <h2 id="spotlight-heading" class="text-5xl md:text-6xl text-zinc-900 mb-8 leading-tight">
-          The Winter <br>
-          <em class="italic">Lumina</em> Series
+          {{ section.settings.heading_line_1 }}
+          {%- if section.settings.heading_line_2 != blank -%}
+            <br>
+            <em class="italic">{{ section.settings.heading_line_2 }}</em>
+          {%- endif -%}
         </h2>
         <p class="text-lg text-zinc-600 mb-10 leading-relaxed max-w-lg">
-          Inspired by the refraction of morning light on frost, the Lumina Series features heavy bases and hand-etched
-          textures that capture and scatter light in breathtaking ways.
+          {{ section.settings.description }}
         </p>
-        <ul class="space-y-4 mb-12 text-zinc-700 font-sans">
-          <li class="flex items-center gap-3">
-            <span class="w-1.5 h-1.5 rounded-full bg-zinc-900 flex-shrink-0" aria-hidden="true"></span>
-            Hand-blown crystal from Bavaria
-          </li>
-          <li class="flex items-center gap-3">
-            <span class="w-1.5 h-1.5 rounded-full bg-zinc-900 flex-shrink-0" aria-hidden="true"></span>
-            Signature diamond-cut textures
-          </li>
-          <li class="flex items-center gap-3">
-            <span class="w-1.5 h-1.5 rounded-full bg-zinc-900 flex-shrink-0" aria-hidden="true"></span>
-            Available for a limited time only
-          </li>
-        </ul>
+
+        {%- comment -%} Feature bullet list from blocks {%- endcomment -%}
+        {%- if section.blocks.size > 0 -%}
+          <ul class="space-y-4 mb-12 text-zinc-700 font-sans">
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'feature_item' -%}
+                <li class="flex items-center gap-3" {{ block.shopify_attributes }}>
+                  <span class="w-1.5 h-1.5 rounded-full bg-zinc-900 flex-shrink-0" aria-hidden="true"></span>
+                  {{ block.settings.feature_text }}
+                </li>
+              {%- endif -%}
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+
         <a
-          href="#collection"
+          href="{{ section.settings.button_url }}"
           class="group inline-flex items-center gap-4 bg-zinc-900 text-white px-10 py-5 font-bold tracking-widest uppercase text-xs hover:bg-zinc-800 transition-all"
         >
-          Discover the Collection
+          {{ section.settings.button_label }}
           <span class="w-10 h-px bg-white group-hover:w-16 transition-all duration-500" aria-hidden="true"></span>
         </a>
       </div>
     </div>
   </div>
 </section>
+
+{% schema %}
+{
+  "name": "Collection Spotlight",
+  "tag": "section",
+  "class": "section-collection-spotlit",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Gallery"
+    },
+    {
+      "type": "text",
+      "id": "gallery_aria_label",
+      "label": "Gallery accessible label",
+      "default": "Gallery showcasing The Winter Lumina Series glassware collection"
+    },
+    {
+      "type": "header",
+      "content": "Image 1 (tall, left column)"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_1",
+      "label": "Image 1"
+    },
+    {
+      "type": "text",
+      "id": "image_1_alt",
+      "label": "Image 1 alt text",
+      "default": "Close-up of textured crystal glass detail showing light refraction"
+    },
+    {
+      "type": "url",
+      "id": "image_1_url",
+      "label": "Image 1 fallback URL"
+    },
+    {
+      "type": "header",
+      "content": "Image 2 (square, left column)"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "Image 2"
+    },
+    {
+      "type": "text",
+      "id": "image_2_alt",
+      "label": "Image 2 alt text",
+      "default": "Hand-blown crystal glass pitcher from Bavaria"
+    },
+    {
+      "type": "url",
+      "id": "image_2_url",
+      "label": "Image 2 fallback URL"
+    },
+    {
+      "type": "header",
+      "content": "Image 3 (tall, right column)"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_3",
+      "label": "Image 3"
+    },
+    {
+      "type": "text",
+      "id": "image_3_alt",
+      "label": "Image 3 alt text",
+      "default": "Elegant stemware with diamond-cut texture pattern"
+    },
+    {
+      "type": "url",
+      "id": "image_3_url",
+      "label": "Image 3 fallback URL"
+    },
+    {
+      "type": "header",
+      "content": "Quote Card"
+    },
+    {
+      "type": "richtext",
+      "id": "quote_text",
+      "label": "Quote text",
+      "default": "<p>\"Light and glass create the soul of a home.\"</p>"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow_text",
+      "label": "Eyebrow label",
+      "default": "Featured Spotlight"
+    },
+    {
+      "type": "text",
+      "id": "heading_line_1",
+      "label": "Heading – first line",
+      "default": "The Winter"
+    },
+    {
+      "type": "text",
+      "id": "heading_line_2",
+      "label": "Heading – italic second line",
+      "default": "Lumina Series",
+      "info": "Displayed in italics on its own line. Leave blank to hide."
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Inspired by the refraction of morning light on frost, the Lumina Series features heavy bases and hand-etched textures that capture and scatter light in breathtaking ways."
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Discover the Collection"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button URL",
+      "default": "/collections/all"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature_item",
+      "name": "Feature item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "feature_text",
+          "label": "Feature text",
+          "default": "Hand-blown crystal from Bavaria"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collection Spotlight",
+      "blocks": [
+        {
+          "type": "feature_item",
+          "settings": {
+            "feature_text": "Hand-blown crystal from Bavaria"
+          }
+        },
+        {
+          "type": "feature_item",
+          "settings": {
+            "feature_text": "Signature diamond-cut textures"
+          }
+        },
+        {
+          "type": "feature_item",
+          "settings": {
+            "feature_text": "Available for a limited time only"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
