@@ -1,497 +1,108 @@
-<footer
-  aria-labelledby="footer-heading"
-  class="bg-white border-t border-zinc-100 pt-24 pb-12"
->
+<footer class="bg-zinc-900 text-white pt-24 pb-12">
   <div class="max-w-7xl mx-auto px-4 md:px-8">
-    <h2 id="footer-heading" class="sr-only">{{ section.settings.sr_heading }}</h2>
-
-    <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-24">
-      <!-- Shop / Nav Column (driven by footer-menu linklist) -->
-      {%- if linklists[section.settings.menu].links.size > 0 -%}
-        <div>
-          <h3 class="text-[10px] font-bold tracking-[0.3em] uppercase text-zinc-900 mb-8">
-            {{ section.settings.menu_heading }}
-          </h3>
-          <ul class="space-y-4 text-sm text-zinc-500 font-sans">
-            {%- for link in linklists[section.settings.menu].links -%}
-              <li>
-                <a
-                  href="{{ link.url }}"
-                  class="hover:text-zinc-900 transition-colors focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:ring-offset-2 inline-block"
-                  {%- if link.active %}
-                    aria-current="page"
-                  {% endif %}
-                >
-                  {{- link.title -}}
-                </a>
-              </li>
-            {%- endfor -%}
-          </ul>
-        </div>
-      {%- endif -%}
-
-      <!-- Additional link columns driven by blocks -->
-      {%- for block in section.blocks -%}
-        {%- if block.type == 'link_column' -%}
-          <div {{ block.shopify_attributes }}>
-            <h3 class="text-[10px] font-bold tracking-[0.3em] uppercase text-zinc-900 mb-8">
-              {{ block.settings.heading }}
-            </h3>
-            {%- if linklists[block.settings.menu].links.size > 0 -%}
-              <ul class="space-y-4 text-sm text-zinc-500 font-sans">
-                {%- for link in linklists[block.settings.menu].links -%}
-                  <li>
-                    <a
-                      href="{{ link.url }}"
-                      class="hover:text-zinc-900 transition-colors focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:ring-offset-2 inline-block"
-                      {%- if link.active %}
-                        aria-current="page"
-                      {% endif %}
-                    >
-                      {{- link.title -}}
-                    </a>
-                  </li>
-                {%- endfor -%}
-              </ul>
-            {%- endif -%}
-          </div>
-        {%- endif -%}
-      {%- endfor -%}
-
-      <!-- Connect / Social + Newsletter Column -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-12 mb-24">
+      <!-- Company Info Section -->
       <div>
-        <h3 class="text-[10px] font-bold tracking-[0.3em] uppercase text-zinc-900 mb-8">
-          {{ section.settings.connect_heading }}
-        </h3>
+        <h2 class="text-[10px] font-bold uppercase tracking-widest mb-8 text-white/40">Vitrum</h2>
+        <p class="text-sm font-light text-white/60">Founded 1994. Bavaria.</p>
+      </div>
 
-        <!-- Social Icons -->
-        <div class="flex space-x-6 text-zinc-400 mb-8" role="list" aria-label="Social media channels">
-          {%- if section.settings.social_instagram != blank -%}
+      <!-- Shop Navigation -->
+      <div>
+        <h2 class="text-[10px] font-bold uppercase tracking-widest mb-8 text-white/40">Shop</h2>
+        <ul class="space-y-4 text-sm text-white/60 font-light">
+          <li>
             <a
-              href="{{ section.settings.social_instagram }}"
-              class="hover:text-zinc-900 transition-colors focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:ring-offset-2"
-              aria-label="Follow us on Instagram"
-              role="listitem"
+              href="#"
+              class="hover:text-white focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2 focus:ring-offset-zinc-900 transition-colors inline-block"
+              >Drinkware</a
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-                focusable="false"
-              >
-                <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
-                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
-              </svg>
-            </a>
-          {%- endif -%}
-
-          {%- if section.settings.social_facebook != blank -%}
+          </li>
+          <li>
             <a
-              href="{{ section.settings.social_facebook }}"
-              class="hover:text-zinc-900 transition-colors focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:ring-offset-2"
-              aria-label="Follow us on Facebook"
-              role="listitem"
+              href="#"
+              class="hover:text-white focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2 focus:ring-offset-zinc-900 transition-colors inline-block"
+              >Serveware</a
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-                focusable="false"
-              >
-                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
-              </svg>
-            </a>
-          {%- endif -%}
-
-          {%- if section.settings.social_pinterest != blank -%}
+          </li>
+          <li>
             <a
-              href="{{ section.settings.social_pinterest }}"
-              class="hover:text-zinc-900 transition-colors focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:ring-offset-2"
-              aria-label="Follow us on Pinterest"
-              role="listitem"
+              href="#"
+              class="hover:text-white focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2 focus:ring-offset-zinc-900 transition-colors inline-block"
+              >Decanters</a
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-                focusable="false"
-              >
-                <path d="M8 12.75a10.37 10.37 0 0 0 2.25 4.5 10.37 10.37 0 0 0 4.5 2.25"></path>
-                <path d="M12 2a10 10 0 0 0-3.16 19.47"></path>
-                <path d="M12 2a10 10 0 0 1 3.16 19.47"></path>
-                <line x1="12" x2="12" y1="2" y2="22"></line>
-              </svg>
-            </a>
-          {%- endif -%}
+          </li>
+        </ul>
+      </div>
 
-          {%- if section.settings.social_twitter != blank -%}
+      <!-- Brand Navigation -->
+      <div>
+        <h2 class="text-[10px] font-bold uppercase tracking-widest mb-8 text-white/40">Brand</h2>
+        <ul class="space-y-4 text-sm text-white/60 font-light">
+          <li>
             <a
-              href="{{ section.settings.social_twitter }}"
-              class="hover:text-zinc-900 transition-colors focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:ring-offset-2"
-              aria-label="Follow us on X (formerly Twitter)"
-              role="listitem"
+              href="#"
+              class="hover:text-white focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2 focus:ring-offset-zinc-900 transition-colors inline-block"
+              >Our Story</a
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-                focusable="false"
-              >
-                <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path>
-              </svg>
-            </a>
-          {%- endif -%}
-        </div>
+          </li>
+          <li>
+            <a
+              href="#"
+              class="hover:text-white focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2 focus:ring-offset-zinc-900 transition-colors inline-block"
+              >Sustainability</a
+            >
+          </li>
+          <li>
+            <a
+              href="#"
+              class="hover:text-white focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2 focus:ring-offset-zinc-900 transition-colors inline-block"
+              >Careers</a
+            >
+          </li>
+        </ul>
+      </div>
 
-        <!-- Newsletter -->
-        <p id="newsletter-description" class="text-sm text-zinc-500 font-sans leading-relaxed">
-          {{ section.settings.newsletter_text }}
-        </p>
-
-        {%- form 'customer', id: 'footer-newsletter-form' -%}
-          <input type="hidden" name="contact[tags]" value="newsletter">
-          <div
-            class="mt-4 flex border-b border-zinc-200 pb-2"
-            role="group"
-            aria-labelledby="newsletter-heading"
+      <!-- Newsletter Signup -->
+      <div>
+        <h2 class="text-[10px] font-bold uppercase tracking-widest mb-8 text-white/40">Join Us</h2>
+        <div class="flex border-b border-white/20 pb-2 focus-within:border-white/40 focus-within:ring-1 focus-within:ring-white/40">
+          <label for="newsletter-email" class="sr-only">Email Address</label>
+          <input
+            type="email"
+            id="newsletter-email"
+            name="email"
+            placeholder="Email Address"
+            class="bg-transparent text-sm w-full outline-none text-white placeholder-white/40"
+            aria-label="Email address for newsletter"
           >
-            <h4 id="newsletter-heading" class="sr-only">{{ section.settings.newsletter_sr_label }}</h4>
-            <label for="footer-email" class="sr-only">Email address for newsletter</label>
-            <input
-              id="footer-email"
-              name="contact[email]"
-              type="email"
-              inputmode="email"
-              autocomplete="email"
-              placeholder="{{ section.settings.newsletter_placeholder }}"
-              class="bg-transparent text-sm w-full outline-none py-1 font-sans focus:ring-2 focus:ring-zinc-900 focus:ring-inset placeholder:text-zinc-400"
-              required
-              aria-required="true"
-              aria-describedby="newsletter-description"
-            >
-            <button
-              type="submit"
-              class="text-[10px] font-bold tracking-widest uppercase hover:text-zinc-900 transition-colors focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:ring-offset-2"
-              aria-label="{{ section.settings.newsletter_btn_label }}"
-            >
-              {{ section.settings.newsletter_btn_text }}
-            </button>
-          </div>
-
-          {%- if form.posted_successfully? -%}
-            <p class="mt-3 text-xs text-zinc-500" role="status">{{ section.settings.newsletter_success }}</p>
-          {%- endif -%}
-          {%- if form.errors -%}
-            <p class="mt-3 text-xs text-red-500" role="alert">{{ form.errors | default_errors }}</p>
-          {%- endif -%}
-        {%- endform -%}
-
-        <div id="newsletter-status" class="sr-only" role="status" aria-live="polite"></div>
-      </div>
-    </div>
-
-    <!-- Bottom Bar -->
-    <div class="flex flex-col md:flex-row items-center justify-between pt-12 border-t border-zinc-100 gap-6 text-zinc-400 text-[10px] tracking-[0.2em] uppercase font-bold">
-      <div class="flex flex-col md:flex-row items-center gap-6">
-        <span>
-          &copy; {{ 'now' | date: '%Y' }}
-          {{ section.settings.copyright_name }}. {{ section.settings.copyright_suffix }}
-        </span>
-
-        {%- if linklists[section.settings.legal_menu].links.size > 0 -%}
-          <div class="flex gap-6" role="list" aria-label="Legal links">
-            {%- for link in linklists[section.settings.legal_menu].links -%}
-              <a
-                href="{{ link.url }}"
-                class="hover:text-zinc-900 transition-colors focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:ring-offset-2"
-                role="listitem"
-              >
-                {{- link.title -}}
-              </a>
-            {%- endfor -%}
-          </div>
-        {%- endif -%}
-      </div>
-
-      <!-- Payment Icons -->
-      {%- if section.settings.show_payment_icons -%}
-        <div class="flex items-center gap-4" aria-label="{{ section.settings.payment_icons_label }}">
-          {%- for type in shop.enabled_payment_types -%}
-            {{ type | payment_type_svg_tag: class: 'w-8 h-5 opacity-60' }}
-          {%- endfor -%}
+          <button
+            class="text-[10px] font-bold uppercase hover:text-white/80 focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2 focus:ring-offset-zinc-900 transition-colors"
+            aria-label="Subscribe to newsletter"
+          >
+            Join
+          </button>
         </div>
-      {%- endif -%}
+      </div>
     </div>
 
-    <!-- Back to top (mobile) -->
-    <div class="mt-8 text-center md:hidden">
-      <a
-        href="#main-content"
-        class="text-[10px] tracking-widest uppercase text-zinc-400 hover:text-zinc-900 focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:ring-offset-2 inline-block p-2"
-      >
-        {{ section.settings.back_to_top_text }}
-      </a>
+    <!-- Footer Bottom Bar -->
+    <div class="flex flex-col md:flex-row justify-between text-[10px] font-bold tracking-widest uppercase text-white/30 border-t border-white/10 pt-12 gap-4">
+      <span>© 2024 Vitrum Studio. All rights reserved.</span>
+      <div class="flex gap-6" role="list" aria-label="Legal links">
+        <a
+          href="#"
+          class="hover:text-white/50 focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2 focus:ring-offset-zinc-900 transition-colors"
+          role="listitem"
+          >Terms</a
+        >
+        <a
+          href="#"
+          class="hover:text-white/50 focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2 focus:ring-offset-zinc-900 transition-colors"
+          role="listitem"
+          >Privacy</a
+        >
+      </div>
     </div>
   </div>
-
-  <!-- Schema.org Organization markup -->
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": {{ shop.name | json }},
-      "url": {{ shop.url | append: '/' | json }},
-      "logo": {{ section.settings.org_logo | json }},
-      "sameAs": [
-        {{ section.settings.social_instagram | json }},
-        {{ section.settings.social_facebook | json }},
-        {{ section.settings.social_pinterest | json }},
-        {{ section.settings.social_twitter | json }}
-      ],
-      "contactPoint": {
-        "@type": "ContactPoint",
-        "contactType": "customer service",
-        "url": {{ section.settings.contact_url | json }}
-      }
-    }
-  </script>
 </footer>
-
-{% schema %}
-{
-  "name": "Footer",
-  "settings": [
-    {
-      "type": "header",
-      "content": "Accessibility"
-    },
-    {
-      "type": "text",
-      "id": "sr_heading",
-      "label": "Screen reader heading",
-      "default": "Vitrum footer navigation and information"
-    },
-    {
-      "type": "header",
-      "content": "Shop Column (footer-menu)"
-    },
-    {
-      "type": "link_list",
-      "id": "menu",
-      "label": "Navigation menu",
-      "default": "footer-menu",
-      "info": "Select the 'footer-menu' from your Shopify navigation admin."
-    },
-    {
-      "type": "text",
-      "id": "menu_heading",
-      "label": "Column heading",
-      "default": "Shop"
-    },
-    {
-      "type": "header",
-      "content": "Connect Column"
-    },
-    {
-      "type": "text",
-      "id": "connect_heading",
-      "label": "Connect column heading",
-      "default": "Connect"
-    },
-    {
-      "type": "header",
-      "content": "Social Media"
-    },
-    {
-      "type": "url",
-      "id": "social_instagram",
-      "label": "Instagram URL",
-      "default": "https://instagram.com/vitrum_glass"
-    },
-    {
-      "type": "url",
-      "id": "social_facebook",
-      "label": "Facebook URL",
-      "default": "https://facebook.com/vitrum_glass"
-    },
-    {
-      "type": "url",
-      "id": "social_pinterest",
-      "label": "Pinterest URL",
-      "default": "https://pinterest.com/vitrum_glass"
-    },
-    {
-      "type": "url",
-      "id": "social_twitter",
-      "label": "X / Twitter URL",
-      "default": "https://twitter.com/vitrum_glass"
-    },
-    {
-      "type": "header",
-      "content": "Newsletter"
-    },
-    {
-      "type": "text",
-      "id": "newsletter_text",
-      "label": "Newsletter description",
-      "default": "Join our list for exclusive offers and updates."
-    },
-    {
-      "type": "text",
-      "id": "newsletter_sr_label",
-      "label": "Newsletter screen reader label",
-      "default": "Newsletter signup"
-    },
-    {
-      "type": "text",
-      "id": "newsletter_placeholder",
-      "label": "Email input placeholder",
-      "default": "Email address"
-    },
-    {
-      "type": "text",
-      "id": "newsletter_btn_text",
-      "label": "Subscribe button text",
-      "default": "Join"
-    },
-    {
-      "type": "text",
-      "id": "newsletter_btn_label",
-      "label": "Subscribe button aria-label",
-      "default": "Subscribe to newsletter"
-    },
-    {
-      "type": "text",
-      "id": "newsletter_success",
-      "label": "Success message",
-      "default": "Thanks for subscribing!"
-    },
-    {
-      "type": "header",
-      "content": "Bottom Bar"
-    },
-    {
-      "type": "text",
-      "id": "copyright_name",
-      "label": "Brand name in copyright",
-      "default": "Vitrum Studio"
-    },
-    {
-      "type": "text",
-      "id": "copyright_suffix",
-      "label": "Copyright suffix",
-      "default": "All rights reserved."
-    },
-    {
-      "type": "link_list",
-      "id": "legal_menu",
-      "label": "Legal links menu",
-      "info": "Create a navigation menu with links like Terms, Privacy, Accessibility."
-    },
-    {
-      "type": "checkbox",
-      "id": "show_payment_icons",
-      "label": "Show payment icons",
-      "default": true
-    },
-    {
-      "type": "text",
-      "id": "payment_icons_label",
-      "label": "Payment icons aria-label",
-      "default": "Accepted payment methods"
-    },
-    {
-      "type": "text",
-      "id": "back_to_top_text",
-      "label": "Back to top link text",
-      "default": "Back to top"
-    },
-    {
-      "type": "header",
-      "content": "Schema.org / SEO"
-    },
-    {
-      "type": "text",
-      "id": "org_logo",
-      "label": "Organization logo URL",
-      "default": "https://vitrumstudio.com/logo.png",
-      "info": "Absolute URL to your logo used in structured data."
-    },
-    {
-      "type": "url",
-      "id": "contact_url",
-      "label": "Contact page URL",
-      "default": "/contact"
-    }
-  ],
-  "blocks": [
-    {
-      "type": "link_column",
-      "name": "Link Column",
-      "settings": [
-        {
-          "type": "text",
-          "id": "heading",
-          "label": "Column heading",
-          "default": "Customer Care"
-        },
-        {
-          "type": "link_list",
-          "id": "menu",
-          "label": "Navigation menu",
-          "info": "Select or create a navigation menu in your Shopify admin."
-        }
-      ]
-    }
-  ],
-  "max_blocks": 2,
-  "presets": [
-    {
-      "name": "Footer",
-      "blocks": [
-        {
-          "type": "link_column",
-          "settings": {
-            "heading": "Customer Care"
-          }
-        },
-        {
-          "type": "link_column",
-          "settings": {
-            "heading": "The Brand"
-          }
-        }
-      ]
-    }
-  ]
-}
-{% endschema %}
