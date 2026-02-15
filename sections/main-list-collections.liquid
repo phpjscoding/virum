@@ -1,0 +1,96 @@
+<div class="pt-32 pb-24 bg-white">
+  <div class="max-w-7xl mx-auto px-4 md:px-8">
+    <h1 class="text-6xl font-serif italic mb-16">Artisan Drinkware</h1>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
+      <!-- Filter sidebar -->
+      <aside class="lg:col-span-3" aria-label="Product filters">
+        <div class="sticky top-32 space-y-12">
+          <fieldset>
+            <legend class="text-xs font-bold uppercase tracking-widest mb-6">Categories</legend>
+            <div class="space-y-3" role="group" aria-label="Filter by category">
+              {% comment %}{% endcomment %}
+              {% for collection in collections limit: 8 %}
+                <label class="flex items-center gap-3 text-sm text-zinc-500 cursor-pointer hover:text-zinc-900 {{ collection.handle }}">
+                  <input
+                    type="checkbox"
+                    class="accent-zinc-900"
+                    aria-describedby="category-wine"
+                    {% if forloop.first %}
+                      checked
+                    {% endif %}
+                  >
+                  {{ collection.title }}
+                </label>
+              {% endfor %}
+            </div>
+          </fieldset>
+        </div>
+      </aside>
+
+      <!-- Product grid -->
+      <div class="lg:col-span-9">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-16" role="list" aria-label="Products">
+          <!-- Product 1 -->
+          {% assign active_collection = 'drinkware' %}
+          {% paginate collections[active_collection].products by 9 %}
+            <div class="text-[10px] font-bold tracking-widest uppercase text-zinc-400">
+              Showing
+              <span class="text-zinc-900">{{ paginate.items }}</span>
+              {%- if paginate.pages > 1 -%}
+                &nbsp;&mdash;&nbsp;Page
+                <span class="text-zinc-900">{{ paginate.current_page }}</span>
+                of
+                <span class="text-zinc-900">{{ paginate.pages }}</span>
+              {%- endif -%}
+              {{ active_collection }} Products
+            </div>
+            {% for product in collections[active_collection].products %}
+              <article
+                role="listitem"
+                class="flex-col group cursor-pointer"
+                onclick="navigateTo('product', {id: 'p1'})"
+                onkeydown="if(event.key==='Enter'||event.key===' ') { event.preventDefault(); navigateTo('product', {id: 'p1'}); }"
+                tabindex="0"
+                aria-labelledby="product-1-title product-1-price"
+              >
+                <div class="relative aspect-[3/4] overflow-hidden bg-zinc-50 mb-6">
+                  <img
+                    src="{{ product.featured_image | image_url: width:400}}"
+                    class="w-full h-full object-cover transition-transform group-hover:scale-105"
+                    alt="{{ product.featured_image.alt | escape }}"
+                    height="auto"
+                    loading="lazy"
+                  >
+                  <div class="absolute bottom-0 left-0 right-0 p-4 bg-white/80 translate-y-full group-hover:translate-y-0 transition-transform group-focus-within:translate-y-0">
+                    <button
+                      onclick="event.stopPropagation(); addToCart('p1')"
+                      class="w-full py-2 bg-zinc-900 text-white text-[10px] font-bold uppercase hover:bg-zinc-800 focus:outline-none focus:ring-2 focus:ring-zinc-500 focus:ring-offset-2"
+                      aria-label="Quick add Aurelia Crystal Flute to cart"
+                    >
+                      Quick Add
+                    </button>
+                  </div>
+                </div>
+                <div class="text-center">
+                  <h3 id="product-1-title" class="text-lg">
+                    {{ product.title | escape }}
+                  </h3>
+                  <p id="product-1-price" class="text-zinc-500 font-medium" aria-label="Price: $45.00">
+                    {{ product.price | money | escape }}
+                  </p>
+                </div>
+              </article>
+            {% endfor %}
+            {%- if paginate.pages > 1 -%}
+              {% render page_numbers,paginate %}
+
+              <!-- Accessible page summary for screen readers -->
+              <p class="sr-only" aria-live="polite">Page {{ paginate.current_page }} of {{ paginate.pages }}</p>
+            {%- endif -%}
+          {% endpaginate %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
