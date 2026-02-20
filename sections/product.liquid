@@ -1,46 +1,575 @@
-{% comment %}
-  This section is used in the product template to render product page with
-  media, content, and add-to-cart form.
+<!-- Structured Data (JSON-LD) -->
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org/",
+    "@type": "Product",
+    "name": "{{product.title | escape }}",
+    "image": "{{product.featured_image }}",
+    "description": "{{product.description }}",
+    "brand": { "@type": "Brand", "name": "LuxGlass" },
+    "category": "Serveware",
+    "offers": {
+      "@type": "Offer",
+      "priceCurrency": "USD",
+      "price": "178.00",
+      "availability": "https://schema.org/InStock",
+      "url": "https://luxglass.com/serveware/aurora-glass-pitcher"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "5",
+      "reviewCount": "2"
+    },
+    {% comment %} "review": [
+      {
+        "@type": "Review",
+        "author": { "@type": "Person", "name": "Sarah M." },
+        "reviewBody": "The light refraction on these glasses is absolutely stunning. They feel substantial but not heavy, balanced perfectly for a long evening of conversation.",
+        "reviewRating": { "@type": "Rating", "ratingValue": "5" },
+        "datePublished": "2023-10-24",
+        "name": "Simply breathtaking quality."
+      }
+    ] {% endcomment %}
+  }
+</script>
+<style>
+  /* Skip-to-content link for keyboard users */
+  .skip-link {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+    z-index: 999;
+    background: #18181b;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .skip-link:focus {
+    top: 1rem;
+    left: 1rem;
+  }
+  /* Focus ring */
+  :focus-visible {
+    outline: 2px solid #18181b;
+    outline-offset: 3px;
+  }
+  /* Visually hidden utility */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+</style>
 
-  https://shopify.dev/docs/storefronts/themes/architecture/templates/product
-{% endcomment %}
-template name
-<h2>{{ template.name }}</h2>
-<div class="product-images">
-  {% for image in product.images %}
-    {% render 'image', class: 'product-image', image: image %}
-  {% endfor %}
-</div>
+<a href="#main-content" class="skip-link">Skip to main content</a>
 
-<div class="product-info">
-  <h1>{{ product.title }}</h1>
-  <p>{{ product.price | money }}</p>
-  <p>{{ product.description }}</p>
-</div>
-
-<div class="product-form">
-  {% form 'product', product %}
-    {% assign current_variant = product.selected_or_first_available_variant %}
-
-    <select name="id">
-      {% for variant in product.variants %}
-        <option
-          value="{{ variant.id }}"
-          {% if variant == current_variant %}
-            selected="selected"
-          {% endif %}
+<div class="max-w-7xl mx-auto px-4 md:px-8">
+  <!--
+    ============================================================
+         BREADCRUMB NAV
+         Semantic: <nav> with aria-label, <ol> list, structured data
+    ============================================================
+  -->
+  <nav
+    aria-label="Breadcrumb"
+    class="flex items-center space-x-2 text-[10px] font-bold tracking-widest uppercase text-zinc-400 mb-12"
+  >
+    <ol class="flex items-center space-x-2" itemscope itemtype="https://schema.org/BreadcrumbList">
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a href="/" itemprop="item" class="hover:text-zinc-900 transition-colors">
+          <span itemprop="name">Home</span>
+        </a>
+        <meta itemprop="position" content="1">
+      </li>
+      <!-- Decorative separator – hidden from AT -->
+      <li aria-hidden="true">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="12"
+          height="12"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          focusable="false"
         >
-          {{ variant.title }} - {{ variant.price | money }}
-        </option>
-      {% endfor %}
-    </select>
+          <path d="m9 18 6-6-6-6"/>
+        </svg>
+      </li>
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a href="/serveware" itemprop="item" class="hover:text-zinc-900 transition-colors">
+          <span itemprop="name">Serveware</span>
+        </a>
+        <meta itemprop="position" content="2">
+      </li>
+      <li aria-hidden="true">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="12"
+          height="12"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          focusable="false"
+        >
+          <path d="m9 18 6-6-6-6"/>
+        </svg>
+      </li>
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <span itemprop="name" aria-current="page" class="text-zinc-900">Aurora Glass Pitcher</span>
+        <meta itemprop="position" content="3">
+      </li>
+    </ol>
+  </nav>
 
-    <input type="text" name="quantity" min="1" value="1">
+  <div id="main-content">
+    <section aria-label="Product details" class="grid grid-cols-1 lg:grid-cols-12 gap-16 mb-24">
+      <!-- ── Product Gallery ───────────────────────────────────── -->
+      <div class="lg:col-span-7 space-y-4">
+        <!-- Main product image -->
+        {% assign current_variant = product.selected_or_first_available_variant | default: product.selected_variant %}
 
-    <input type="submit" value="Add to cart">
-    {{ form | payment_button }}
-  {% endform %}
+        <figure class="aspect-[4/5] bg-zinc-50 overflow-hidden relative group m-0">
+          {% if current_variant and current_variant.featured_media %}
+            <img
+              src="{{ current_variant.featured_media | image_url: width:800 ,height:1000 }}"
+              alt="{{ current_variant.handle }}"
+              width="800"
+              height="1000"
+              class="w-full h-full object-cover"
+              loading="eager"
+              fetchpriority="high"
+            >
+          {% else %}
+            <img
+              src="{{ product.featured_media | image_url: width:800 ,height:1000 }}"
+              alt="{{ product.handle }}"
+              width="800"
+              height="1000"
+              class="w-full h-full object-cover"
+              loading="eager"
+              fetchpriority="high"
+            >
+          {% endif %}
+        </figure>
+
+        <!-- Thumbnail gallery -->
+        {% render 'product-thumbnails', variant: product.selected_or_first_available_variant, product: product %}
+      </div>
+
+      <!-- ── Product Info ──────────────────────────────────────── -->
+      <div class="lg:col-span-5 flex flex-col">
+        <!-- Category label -->
+        <p class="text-zinc-400 text-[10px] tracking-widest uppercase font-bold mb-2">
+          <a href="/serveware" class="hover:text-zinc-700 transition-colors">Serveware</a>
+        </p>
+
+        <!-- Product title – h1 is correct here as it's the page subject -->
+        <h1 class="text-4xl md:text-5xl lg:text-6xl text-zinc-900 mb-6 font-serif leading-tight">
+          Aurora Glass Pitcher
+        </h1>
+
+        <!-- Rating summary -->
+        <div class="flex items-center gap-4 mb-8">
+          <div
+            aria-label="Rated 5 out of 5 stars"
+            role="img"
+            class="flex text-zinc-900"
+          >
+            <!-- 5 filled stars – decorative, label on the parent covers them -->
+            <svg
+              aria-hidden="true"
+              focusable="false"
+              xmlns="http://www.w3.org/2000/svg"
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/>
+            </svg>
+            <svg
+              aria-hidden="true"
+              focusable="false"
+              xmlns="http://www.w3.org/2000/svg"
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/>
+            </svg>
+            <svg
+              aria-hidden="true"
+              focusable="false"
+              xmlns="http://www.w3.org/2000/svg"
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/>
+            </svg>
+            <svg
+              aria-hidden="true"
+              focusable="false"
+              xmlns="http://www.w3.org/2000/svg"
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/>
+            </svg>
+            <svg
+              aria-hidden="true"
+              focusable="false"
+              xmlns="http://www.w3.org/2000/svg"
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/>
+            </svg>
+          </div>
+          <!-- Linked so users can jump directly to reviews -->
+          <a
+            href="#reviews"
+            class="text-[10px] font-bold tracking-widest uppercase text-zinc-400 hover:text-zinc-700 transition-colors"
+          >
+            2 Reviews
+          </a>
+        </div>
+
+        <!-- Price – use <p> + <data> for machine-readability -->
+        <p class="text-3xl text-zinc-900 mb-8 font-light">
+          <data value="178.00">$178.00</data>
+        </p>
+
+        <!-- Short description / tagline -->
+        <blockquote class="text-zinc-600 text-lg leading-relaxed mb-10 border-l-2 border-zinc-100 pl-6 italic not-italic-prose">
+          <p>
+            Masterfully crafted for the modern connoisseur, this piece combines structural integrity with visual
+            brilliance.
+          </p>
+        </blockquote>
+
+        <!-- ── Add to Bag Form ───────────────────────────── -->
+        <div class="space-y-8 mb-12">
+          <!-- Set Size selection -->
+          <fieldset class="border-0 p-0 m-0">
+            <legend class="text-[10px] font-bold tracking-[0.3em] uppercase block mb-4">Set Size</legend>
+            <div class="grid grid-cols-3 gap-3" role="group" aria-label="Choose set size">
+              <label class="cursor-pointer">
+                <input type="radio" name="set-size" value="set-of-2" class="sr-only">
+                <span class="block py-3 text-center text-[10px] font-bold tracking-widest uppercase border transition-all bg-white text-zinc-500 border-zinc-200 hover:border-zinc-900 peer-checked:bg-zinc-900 peer-checked:text-white peer-checked:border-zinc-900 cursor-pointer select-none">
+                  Set of 2
+                </span>
+              </label>
+              <label class="cursor-pointer">
+                <input type="radio" name="set-size" value="set-of-4" class="sr-only" checked>
+                <span class="block py-3 text-center text-[10px] font-bold tracking-widest uppercase border transition-all bg-zinc-900 text-white border-zinc-900 cursor-pointer select-none">
+                  Set of 4
+                </span>
+              </label>
+              <label class="cursor-pointer">
+                <input type="radio" name="set-size" value="set-of-6" class="sr-only">
+                <span class="block py-3 text-center text-[10px] font-bold tracking-widest uppercase border transition-all bg-white text-zinc-500 border-zinc-200 hover:border-zinc-900 cursor-pointer select-none">
+                  Set of 6
+                </span>
+              </label>
+            </div>
+          </fieldset>
+
+          <!-- Quantity + Add to Bag -->
+          <div class="flex items-center gap-6">
+            <!-- Quantity stepper – uses spinbutton role -->
+            <div
+              role="spinbutton"
+              aria-valuenow="1"
+              aria-valuemin="1"
+              aria-valuemax="99"
+              aria-label="Quantity"
+              class="flex items-center border border-zinc-200"
+            >
+              <button
+                type="button"
+                aria-label="Decrease quantity"
+                class="p-4 hover:bg-zinc-50 text-zinc-500 transition-colors"
+              >
+                <svg
+                  aria-hidden="true"
+                  focusable="false"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M5 12h14"/>
+                </svg>
+              </button>
+              <output aria-live="polite" class="px-6 py-2 text-sm font-bold w-12 text-center">1</output>
+              <button
+                type="button"
+                aria-label="Increase quantity"
+                class="p-4 hover:bg-zinc-50 text-zinc-500 transition-colors"
+              >
+                <svg
+                  aria-hidden="true"
+                  focusable="false"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M5 12h14"/><path d="M12 5v14"/>
+                </svg>
+              </button>
+            </div>
+
+            <button
+              type="button"
+              class="flex-1 bg-zinc-900 text-white py-4 font-bold tracking-[0.2em] uppercase text-xs hover:bg-zinc-800 transition-all flex items-center justify-center gap-3"
+              aria-label="Add Aurora Glass Pitcher (Set of 4) to bag"
+            >
+              Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <!-- Secondary actions -->
+        <div class="flex items-center justify-between py-6 border-y border-zinc-100 mb-12">
+          <button
+            type="button"
+            class="flex items-center gap-2 text-[10px] font-bold tracking-widest uppercase text-zinc-500 hover:text-zinc-900 transition-colors"
+            aria-label="Add Aurora Glass Pitcher to wishlist"
+          >
+            <svg
+              aria-hidden="true"
+              focusable="false"
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"/>
+            </svg>
+            Add to Wishlist
+          </button>
+          <button
+            type="button"
+            class="flex items-center gap-2 text-[10px] font-bold tracking-widest uppercase text-zinc-500 hover:text-zinc-900 transition-colors"
+            aria-label="Share Aurora Glass Pitcher product"
+          >
+            <svg
+              aria-hidden="true"
+              focusable="false"
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" x2="15.42" y1="13.51" y2="17.49"/><line x1="15.41" x2="8.59" y1="6.51" y2="10.49"/>
+            </svg>
+            Share Product
+          </button>
+        </div>
+
+        <!-- Trust badges -->
+        <ul class="grid grid-cols-3 gap-4 list-none p-0 m-0" aria-label="Shipping and purchase assurances">
+          <li class="text-center p-4 bg-zinc-50">
+            <svg
+              aria-hidden="true"
+              focusable="false"
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="mx-auto mb-2 text-zinc-400"
+            >
+              <path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/>
+            </svg>
+            <p class="text-[8px] font-bold tracking-widest uppercase">Safe Ship</p>
+          </li>
+          <li class="text-center p-4 bg-zinc-50">
+            <svg
+              aria-hidden="true"
+              focusable="false"
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="mx-auto mb-2 text-zinc-400"
+            >
+              <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/>
+            </svg>
+            <p class="text-[8px] font-bold tracking-widest uppercase">Certified</p>
+          </li>
+          <li class="text-center p-4 bg-zinc-50">
+            <svg
+              aria-hidden="true"
+              focusable="false"
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="mx-auto mb-2 text-zinc-400"
+            >
+              <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/>
+            </svg>
+            <p class="text-[8px] font-bold tracking-widest uppercase">30-Day Return</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+  </div>
 </div>
+
+<!-- Tab interactivity -->
+<script>
+  const tabs = document.querySelectorAll('[role="tab"]');
+  const panels = document.querySelectorAll('[role="tabpanel"]');
+
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      // Deselect all
+      tabs.forEach((t) => {
+        t.setAttribute('aria-selected', 'false');
+        t.classList.remove('text-zinc-900');
+        t.classList.add('text-zinc-400');
+        const indicator = t.querySelector('span[aria-hidden]');
+        if (indicator) indicator.remove();
+      });
+      panels.forEach((p) => p.setAttribute('hidden', ''));
+
+      // Select clicked
+      tab.setAttribute('aria-selected', 'true');
+      tab.classList.add('text-zinc-900');
+      tab.classList.remove('text-zinc-400');
+      const indicator = document.createElement('span');
+      indicator.setAttribute('aria-hidden', 'true');
+      indicator.className = 'absolute bottom-0 left-0 right-0 h-0.5 bg-zinc-900';
+      tab.appendChild(indicator);
+
+      const panel = document.getElementById(tab.getAttribute('aria-controls'));
+      panel.removeAttribute('hidden');
+      panel.focus();
+    });
+
+    // Arrow-key navigation
+    tab.addEventListener('keydown', (e) => {
+      const idx = [...tabs].indexOf(tab);
+      if (e.key === 'ArrowRight') {
+        tabs[(idx + 1) % tabs.length].click();
+        tabs[(idx + 1) % tabs.length].focus();
+      }
+      if (e.key === 'ArrowLeft') {
+        tabs[(idx - 1 + tabs.length) % tabs.length].click();
+        tabs[(idx - 1 + tabs.length) % tabs.length].focus();
+      }
+    });
+  });
+
+  // Quantity stepper
+  const output = document.querySelector('output[aria-live]');
+  const spinbutton = document.querySelector('[role="spinbutton"]');
+  const [decBtn, incBtn] = spinbutton.querySelectorAll('button');
+  let qty = 1;
+  decBtn.addEventListener('click', () => {
+    if (qty > 1) {
+      qty--;
+      output.textContent = qty;
+      spinbutton.setAttribute('aria-valuenow', qty);
+    }
+  });
+  incBtn.addEventListener('click', () => {
+    if (qty < 99) {
+      qty++;
+      output.textContent = qty;
+      spinbutton.setAttribute('aria-valuenow', qty);
+    }
+  });
+
+  // Set-size radio style sync
+  document.querySelectorAll('input[name="set-size"]').forEach((radio) => {
+    radio.addEventListener('change', () => {
+      document.querySelectorAll('input[name="set-size"]').forEach((r) => {
+        const span = r.nextElementSibling;
+        if (r.checked) {
+          span.className = span.className.replace(
+            'bg-white text-zinc-500 border-zinc-200',
+            'bg-zinc-900 text-white border-zinc-900'
+          );
+        } else {
+          span.className = span.className.replace(
+            'bg-zinc-900 text-white border-zinc-900',
+            'bg-white text-zinc-500 border-zinc-200'
+          );
+        }
+      });
+    });
+  });
+</script>
 
 {% schema %}
 {
