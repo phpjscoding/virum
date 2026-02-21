@@ -158,3 +158,28 @@ Visit our [CONTRIBUTING.md](./CONTRIBUTING.md) for a detailed overview of our pr
 ## License
 
 Skeleton Theme is open-sourced under the [MIT](./LICENSE.md) License.
+<!-- {% form 'product', product %}
+  <label for="product-{{ product.id }}-variant">
+    {{ 'products.product.choose_option' | t }}
+  </label>
+  <select
+    id="product-{{ product.id }}-variant"
+    name="id"
+  >
+    {% for variant in product.variants %}
+      <option
+        value="{{ variant.id }}"
+        {% if variant == product.selected_or_first_available_variant %}
+          selected
+        {% endif %}
+        {% unless variant.available %}disabled{% endunless %}
+      >
+        {{ variant.title }} – {{ variant.price | money }}
+      </option>
+    {% endfor %}
+  </select>
+
+  <button type="submit">
+    {{ 'products.product.add_to_cart' | t }}
+  </button>
+{% endform %} -->

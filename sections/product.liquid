@@ -180,7 +180,7 @@
 
         <!-- Product title – h1 is correct here as it's the page subject -->
         <h1 class="text-4xl md:text-5xl lg:text-6xl text-zinc-900 mb-6 font-serif leading-tight">
-          Aurora Glass Pitcher
+          {{ product.title | escape }}
         </h1>
 
         <!-- Rating summary -->
@@ -268,7 +268,7 @@
 
         <!-- Price – use <p> + <data> for machine-readability -->
         <p class="text-3xl text-zinc-900 mb-8 font-light">
-          <data value="178.00">$178.00</data>
+          <data value="178.00"> {{ product.price | money }} </data>
         </p>
 
         <!-- Short description / tagline -->
@@ -309,66 +309,74 @@
           <!-- Quantity + Add to Bag -->
           <div class="flex items-center gap-6">
             <!-- Quantity stepper – uses spinbutton role -->
-            <div
-              role="spinbutton"
-              aria-valuenow="1"
-              aria-valuemin="1"
-              aria-valuemax="99"
-              aria-label="Quantity"
-              class="flex items-center border border-zinc-200"
-            >
-              <button
-                type="button"
-                aria-label="Decrease quantity"
-                class="p-4 hover:bg-zinc-50 text-zinc-500 transition-colors"
+            {% form 'product', product %}
+              <div
+                role="spinbutton"
+                aria-valuenow="1"
+                aria-valuemin="1"
+                aria-valuemax="99"
+                aria-label="Quantity"
+                class="flex items-center border border-zinc-200"
               >
-                <svg
-                  aria-hidden="true"
-                  focusable="false"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                <button
+                  type="button"
+                  aria-label="Decrease quantity"
+                  class="p-4 hover:bg-zinc-50 text-zinc-500 transition-colors"
                 >
-                  <path d="M5 12h14"/>
-                </svg>
-              </button>
-              <output aria-live="polite" class="px-6 py-2 text-sm font-bold w-12 text-center">1</output>
-              <button
-                type="button"
-                aria-label="Increase quantity"
-                class="p-4 hover:bg-zinc-50 text-zinc-500 transition-colors"
-              >
-                <svg
-                  aria-hidden="true"
-                  focusable="false"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  <svg
+                    aria-hidden="true"
+                    focusable="false"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M5 12h14"/>
+                  </svg>
+                </button>
+                <output aria-live="polite" class="px-6 py-2 text-sm font-bold w-12 text-center">1</output>
+                <button
+                  type="button"
+                  aria-label="Increase quantity"
+                  class="p-4 hover:bg-zinc-50 text-zinc-500 transition-colors"
                 >
-                  <path d="M5 12h14"/><path d="M12 5v14"/>
-                </svg>
-              </button>
-            </div>
+                  <svg
+                    aria-hidden="true"
+                    focusable="false"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M5 12h14"/><path d="M12 5v14"/>
+                  </svg>
+                </button>
+              </div>
+              <input type="hidden" name="id" value="{{current_variant.id }}">
+              <select>
+                {% for variant in product.variants %}
+                  <option>{{ variant.title }}</option>
+                {% endfor %}
+              </select>
 
-            <button
-              type="button"
-              class="flex-1 bg-zinc-900 text-white py-4 font-bold tracking-[0.2em] uppercase text-xs hover:bg-zinc-800 transition-all flex items-center justify-center gap-3"
-              aria-label="Add Aurora Glass Pitcher (Set of 4) to bag"
-            >
-              Add to Bag
-            </button>
+              <button
+                type="submit"
+                class="flex-1 bg-zinc-900 text-white py-4 font-bold tracking-[0.2em] uppercase text-xs hover:bg-zinc-800 transition-all flex items-center justify-center gap-3"
+                aria-label="Add {{current_variant.title }} to bag"
+              >
+                Add to Bag
+              </button>
+            {% endform %}
           </div>
         </div>
 
