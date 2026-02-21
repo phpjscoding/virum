@@ -30,7 +30,7 @@
         </div>
 
         <!-- Cart Item -->
-        {% form 'cart', id: 'cart' %}
+        {% form 'cart', cart, id: 'cart' %}
           {% for item in cart.items %}
             <article class="flex gap-8 pb-12 border-b border-zinc-50" role="listitem">
               <!-- Product Image -->
