@@ -502,3 +502,147 @@ Skeleton Theme is open-sourced under the [MIT](./LICENSE.md) License.
   ]
 }
 {% endschema %}
+
+--------
+
+
+
+
+
+-
+-
+-
+-
+-
+
+{
+    "token": "hWN8pFqA4F426C70bYfgAVM1?key=d369b9430127e71c62e77af38f680024",
+    "note": "",
+    "attributes": {},
+    "original_total_price": 13097,
+    "total_price": 13097,
+    "total_discount": 0,
+    "total_weight": 7365.9772,
+    "item_count": 3,
+    "items": [
+        {
+            "id": 42780641394736,
+            "properties": {},
+            "quantity": 1,
+            "variant_id": 42780641394736,
+            "key": "42780641394736:d60d0d4f80430d274f3a510c09d60278",
+            "title": "&quot;Libbey Impressions Pitcher, 80.1 ounce&quot;",
+            "price": 4899,
+            "original_price": 4899,
+            "presentment_price": 48.99,
+            "discounted_price": 4899,
+            "line_price": 4899,
+            "original_line_price": 4899,
+            "total_discount": 0,
+            "discounts": [],
+            "sku": "624161",
+            "grams": 2458,
+            "vendor": "Libbey",
+            "taxable": true,
+            "product_id": 7898586710064,
+            "product_has_only_default_variant": true,
+            "gift_card": false,
+            "final_price": 4899,
+            "final_line_price": 4899,
+            "url": "/products/libbey-impressions-pitcher-80-1-ounce?variant=42780641394736",
+            "featured_image": {
+                "aspect_ratio": 1,
+                "alt": "\"Libbey Impressions Pitcher, 80.1 ounce\"",
+                "height": 2048,
+                "url": "https://cdn.shopify.com/s/files/1/0672/5749/9696/files/e8b1f4180c9f304873e731f070e6f9db98897534.jpg?v=1771174125",
+                "width": 2048
+            },
+            "image": "https://cdn.shopify.com/s/files/1/0672/5749/9696/files/e8b1f4180c9f304873e731f070e6f9db98897534.jpg?v=1771174125",
+            "handle": "libbey-impressions-pitcher-80-1-ounce",
+            "requires_shipping": true,
+            "product_type": "Serveware",
+            "product_title": "\"Libbey Impressions Pitcher, 80.1 ounce\"",
+            "product_description": "\"Impressions are everything, and we mean that literally! The sleek and modern 80.1-ounce Impressions pitcher boasts a unique dimpled shape that makes it easy to hold. Four comfortable indents cradle one hand while the other grasps the sturdy handle, and the classic silhouette and crystal-clear glass sides showcase your creativity.\n\nFeaturing:\n\nUnique four-sided dimpled shape makes carrying and pouring a joy; serve cold beverages, from wine and cocktails to refreshing lemonade, iced tea, or water\n\nCoordinates with the durable, top-selling Impressions glassware set or any other classy collection\n\nIncludes 1, 80.1-ounce pitcher\n\nLead-free and handblown in Mexico\n\nNot safe for use with hot liquids; Handwash only; to help preserve your products, please refer to the brand website for care and handling instructions\n\n\n\nSecurely packaged in shipping box; always wash prior to use as orders fulfilled by Libbey are shipped directly from manufacturer's warehouse\n\n\nProduct Dimensions (Country of Origin):\n\n - 7.4 x 5.7 x 10.1 inches\n (Mexico)\n\"",
+            "variant_title": null,
+            "variant_options": [
+                "Default Title"
+            ],
+            "options_with_values": [
+                {
+                    "name": "Title",
+                    "value": "Default Title"
+                }
+            ],
+            "line_level_discount_allocations": [],
+            "line_level_total_discount": 0,
+            "quantity_rule": {
+                "min": 1,
+                "max": null,
+                "increment": 1
+            },
+            "has_components": false
+        },
+        {
+            "id": 42780641558576,
+            "properties": {},
+            "quantity": 2,
+            "variant_id": 42780641558576,
+            "key": "42780641558576:c2ce7a7d87a9bebf3d1a5ebf9c042a3f",
+            "title": "&quot;Libbey Yucatan Glass Pitcher, 86.9 ounce&quot;",
+            "price": 4099,
+            "original_price": 4099,
+            "presentment_price": 40.99,
+            "discounted_price": 4099,
+            "line_price": 8198,
+            "original_line_price": 8198,
+            "total_discount": 0,
+            "discounts": [],
+            "sku": "656202",
+            "grams": 2454,
+            "vendor": "Libbey",
+            "taxable": true,
+            "product_id": 7898586873904,
+            "product_has_only_default_variant": true,
+            "gift_card": false,
+            "final_price": 4099,
+            "final_line_price": 8198,
+            "url": "/products/libbey-yucatan-glass-pitcher-86-9-ounce?variant=42780641558576",
+            "featured_image": {
+                "aspect_ratio": 1,
+                "alt": "\"Libbey Yucatan Glass Pitcher, 86.9 ounce\"",
+                "height": 2048,
+                "url": "https://cdn.shopify.com/s/files/1/0672/5749/9696/files/ec7f6a56495791f6590631379f441ef2a1517a08.jpg?v=1771174133",
+                "width": 2048
+            },
+            "image": "https://cdn.shopify.com/s/files/1/0672/5749/9696/files/ec7f6a56495791f6590631379f441ef2a1517a08.jpg?v=1771174133",
+            "handle": "libbey-yucatan-glass-pitcher-86-9-ounce",
+            "requires_shipping": true,
+            "product_type": "Serveware",
+            "product_title": "\"Libbey Yucatan Glass Pitcher, 86.9 ounce\"",
+            "product_description": "\"Send a ripple of excitement through your party with the unique Yucatan pitcher. If the crinkly, crackly texture doesn't get your guests' attention, the dramatic size sure will! Especially once you fill it up with your signature frozen coconut-orange daiquiris. Phew - we got chills just thinking about it.\n\nFeaturing:\n\nLarge Capacity: Holds up to 86 fluid ounces, suitable for serving margaritas, lemonade, iced tea, or water.\n\nHandcrafted Design: Made in Mexico by skilled glass artisans for a unique, handmade appearance.\n\nHammered Texture: Features a hammered pattern around the pitcher that creates a distinct decorative look.\n\nDurable Construction: Crafted from lead-free glass with thick walls for reliable, everyday use.\n\nCare Instructions: Hand washing is recommended to help maintain the hammered finish and clarity of the glass.\n\n\n\nSecurely packaged in shipping box; always wash prior to use as orders fulfilled by Libbey are shipped directly from manufacturer's warehouse\n\n\nProduct Dimensions (Country of Origin):\n\n - 7.9 x 6.5 x 10.3 inches\n (Mexico)\n\"",
+            "variant_title": null,
+            "variant_options": [
+                "Default Title"
+            ],
+            "options_with_values": [
+                {
+                    "name": "Title",
+                    "value": "Default Title"
+                }
+            ],
+            "line_level_discount_allocations": [],
+            "line_level_total_discount": 0,
+            "quantity_rule": {
+                "min": 1,
+                "max": null,
+                "increment": 1
+            },
+            "has_components": false
+        }
+    ],
+    "requires_shipping": true,
+    "currency": "USD",
+    "items_subtotal_price": 13097,
+    "cart_level_discount_applications": [],
+    "discount_codes": []
+}

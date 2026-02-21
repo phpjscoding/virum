@@ -5,28 +5,6 @@
   https://shopify.dev/docs/storefronts/themes/architecture/templates/cart
 {% endcomment %}
 
-<form action="{{ routes.cart_url }}" method="post">
-  <table>
-    {% for item in cart.items %}
-      <tr>
-        <td>
-          {% render 'image', image: item.image, url: item.url %}
-        </td>
-        <td>
-          <p>{{ item.product.title }}</p>
-          {{ 'cart.remove' | t | link_to: item.url_to_remove }}
-        </td>
-        <td>
-          <input type="text" name="updates[]" value="{{ item.quantity }}">
-          <input type="submit" value="{{ 'cart.update' | t }}">
-        </td>
-      </tr>
-    {% endfor %}
-  </table>
-
-  <input type="submit" name="checkout" value="{{ 'cart.checkout' | t }}">
-</form>
-
 <div class="max-w-7xl mx-auto px-4 md:px-8">
   <!-- Page Header -->
   <h1 class="text-6xl font-serif italic mb-16" id="cart-page-title">
@@ -52,17 +30,18 @@
         </div>
 
         <!-- Cart Item -->
-        {% form ,'cart',id:'cart' %}
+        {% form 'cart', id: 'cart' %}
           {% for item in cart.items %}
             <article class="flex gap-8 pb-12 border-b border-zinc-50" role="listitem">
               <!-- Product Image -->
               <div class="w-32 aspect-[3/4] bg-zinc-100 flex-shrink-0">
                 <img
-                  src="{{ item.image | image_url:width:180,loading:'lazy' }}"
-                  alt="{{ item.product.title }}"
+                  src="{{ item.image | image_url:width:180 }}"
+                  alt="{{ item.title | escape }}"
                   class="w-full h-full object-cover"
                   width="200"
                   height="300"
+                  loading="lazy"
                 >
               </div>
 
@@ -75,7 +54,7 @@
                       {{ item.variant.title | escape }}
 
                     {% else %}
-                      {{ item.product.title | escape }}
+                      {{ item.title | escape }}
                     {% endif %}
                   </h2>
                   <a
@@ -188,7 +167,6 @@
                 <!-- Hidden Product Metadata for Screen Readers -->
                 <div class="sr-only">
                   <p>Collection: {{ item.product.variant }}</p>
-                  <p>In stock: {{ item.product.available }}</p>
                 </div>
               </div>
             </article>
@@ -227,7 +205,9 @@
         <div class="space-y-4 text-sm text-zinc-500" role="region" aria-label="Cost breakdown">
           <div class="flex justify-between">
             <span id="subtotal-label">Subtotal</span>
-            <span aria-labelledby="subtotal-label" aria-label="Subtotal: $178.00">$178.00</span>
+            <span aria-labelledby="subtotal-label" aria-label="Subtotal: $178.00">
+              {{ cart.original_total_price | money }}
+            </span>
           </div>
 
           <div class="flex justify-between">
@@ -246,7 +226,9 @@
         <!-- Total -->
         <div class="flex justify-between text-2xl font-medium">
           <span id="total-label">Total</span>
-          <span aria-labelledby="total-label" aria-label="Total amount: $192.24">$192.24</span>
+          <span aria-labelledby="total-label" aria-label="Total amount: $192.24">
+            {{ cart.total_price | money }}
+          </span>
         </div>
 
         <!-- Checkout Button -->
