@@ -14,7 +14,9 @@
       <!-- Cart Items List -->
       <ul class="space-y-8" aria-label="Cart items">
         <!-- Cart Item 1 -->
-        {% render 'cart-item' %}
+        {% for item in cart.items %}
+          {% render 'cart-item',item:item %}
+        {% endfor %}
       </ul>
 
       <!-- Cart Note -->
