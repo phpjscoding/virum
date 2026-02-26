@@ -73,7 +73,6 @@
   </div>
 
   <div class="md:col-span-4 flex flex-col items-end justify-between">
-    <noscript>
       <div class="quantity-selector">
   <label for="quantity">Quantity:</label>
   <input 
@@ -88,7 +87,8 @@
 
   >
 </div>
-    </noscript>
+    <noscript>
+
     <div
       class="flex items-center border border-black w-fit"
       role="group"
@@ -140,6 +140,8 @@
         </svg>
       </button>
     </div>
+        </noscript>
+
     <p class="text-lg font-medium mt-4" aria-label="Item total: $35.00">
       {{ item.final_price | money }}
     </p>
