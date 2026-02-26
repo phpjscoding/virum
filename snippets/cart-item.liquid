@@ -73,18 +73,73 @@
   </div>
 
   <div class="md:col-span-4 flex flex-col items-end justify-between">
-    <div class="quantity-selector">
+    <noscript>
+      <div class="quantity-selector">
   <label for="quantity">Quantity:</label>
   <input 
     type="number" 
     id="quantity" 
-    name="quantity" 
+    name="updates[]" 
     min="1" 
     max="99" 
     step="1" 
-    value="1"
+    value="{{ item.quantity }}"
+    inputmode="numeric" 
+
   >
 </div>
+    </noscript>
+    <div
+      class="flex items-center border border-black w-fit"
+      role="group"
+      aria-label="Quantity controls for Classic Cotton T-Shirt"
+    >
+      <button
+        class="p-2 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-black transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+        aria-label="Decrease quantity by 1"
+        disabled
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <path d="M5 12h14"></path>
+        </svg>
+      </button>
+      <span class="w-10 text-center font-medium text-sm" aria-label="Current quantity: {{ item.quantity }}">
+        {{ item.quantity }}
+      </span>
+      <button
+        class="p-2 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-black transition-colors"
+        aria-label="Increase quantity by 1"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <path d="M5 12h14"></path>
+          <path d="M12 5v14"></path>
+        </svg>
+      </button>
+    </div>
     <p class="text-lg font-medium mt-4" aria-label="Item total: $35.00">
       {{ item.final_price | money }}
     </p>
