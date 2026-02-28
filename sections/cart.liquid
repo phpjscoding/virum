@@ -7,7 +7,7 @@
       <div class="flex items-baseline justify-between mb-8 border-b border-black pb-4">
         <h2 class="text-3xl md:text-4xl font-medium" id="cart-heading">Your cart</h2>
         <span class="text-gray-500 text-lg" aria-label="2 items in cart">
-          ( {{ cart.item_count | pluralize :'item','items' }} )
+          ( {{ cart.item_count }} {{ cart.item_count | pluralize: 'item', 'items' }} )
         </span>
       </div>
 
