@@ -1,6 +1,6 @@
 <h1 class="sr-only">Shopping Cart</h1>
 <main class="max-w-7xl mx-auto px-4 md:px-8 py-12 md:py-20" id="main-content">
-  {% form 'cart',cart,cart_id:cart.id %}
+  {% form 'cart',cart,id:cart.id %}
   <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
     <!-- Cart Items Section -->
     <section class="lg:col-span-8" aria-labelledby="cart-heading">
@@ -46,6 +46,7 @@
 
     <!-- Order Summary Section -->
     {% render 'order-summary',cart:cart %}
+    <button type="submit" name="checkout" form="{{ cart.id }}"> send</button>
   </div>
 
   <!-- Footer Navigation -->
