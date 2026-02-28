@@ -15,3 +15,8 @@ node_modules/
 ## Release files
 release
 *.zip
+tailwind.config.js
+postcss.config.js
+vite.config.js
+assets/tailwind.css
+assets/*.map
