@@ -1,4 +1,5 @@
 <h1 class="sr-only">Shopping Cart</h1>
+{% form 'cart',cart %}
 <main class="max-w-7xl mx-auto px-4 md:px-8 py-12 md:py-20" id="main-content">
   <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
     <!-- Cart Items Section -->
@@ -56,7 +57,7 @@
     >
       Continue shopping
     </a>
-
+{% endform %}
     <nav aria-label="Footer policies">
       <ul class="flex gap-8 text-[10px] uppercase tracking-tighter text-gray-400">
         <li>
