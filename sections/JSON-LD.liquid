@@ -1,0 +1,53 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org/",
+  "@type": "Product",
+  "name": {{ product.title | json }},
+  "image": {{ product.featured_image | image_url: width: 1200 | json }},
+  "description": {{ product.description | strip_html | truncatewords: 60 | json }},
+  "sku": {{ product.selected_or_first_available_variant.sku | json }},
+  "mpn": {{ product.selected_or_first_available_variant.barcode | json }},
+  "brand": {
+    "@type": "Brand",
+    "name": {{ product.vendor | json | default: "LuxGlass" }}
+  },
+  "category": "{{ product.collection.title }}",
+  "offers": {
+    "@type": "Offer",
+    "priceCurrency": "{{ shop.currency }}",
+    "price": "{{ product.price | money_without_currency | strip | json }}",
+    "availability": "https://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}",
+    "url": {{ product.url | within: collection | absolute_url | json }},
+    "itemCondition": "https://schema.org/NewCondition"
+  },
+  {% if product.metafields.reviews.rating.value != blank %}
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": {{ product.metafields.reviews.rating.value | json }},
+    "reviewCount": {{ product.metafields.reviews.rating_count | default: 0 | json }},
+    "bestRating": {{ product.metafields.reviews.rating.value.scale_max | default: 5 | json }},
+    "worstRating": {{ product.metafields.reviews.rating.value.scale_min | default: 1 | json }}
+  }
+  {% endif %}
+
+  {% comment %}
+  Optional: If you want to include individual reviews (Google sometimes shows them),
+  you would need a review app that exposes an array of reviews via metafields or tags.
+  Most apps output their own schema — avoid duplicating.
+
+  Example skeleton if you later collect reviews in a metafield array:
+  "review": [
+    {% for review in product.metafields.custom.reviews.value %}
+    {
+      "@type": "Review",
+      "author": { "@type": "Person", "name": {{ review.author | json }} },
+      "reviewBody": {{ review.body | json }},
+      "reviewRating": { "@type": "Rating", "ratingValue": {{ review.rating | json }} },
+      "datePublished": {{ review.date | date: "%Y-%m-%d" | json }},
+      "name": {{ review.title | json | default: "Great product!" }}
+    }{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  ]
+  {% endcomment %}
+}
+</script>

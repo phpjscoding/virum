@@ -66,11 +66,11 @@ template name
       <button class="lg:hidden p-2 -ml-2 text-zinc-800">
         {{ 'burgger-menu.svg' | inline_asset_content }}
       </button>
-      <div class="flex-1 lg:flex-none">
+      <a href="{{ shop.url }}" class="flex-1 lg:flex-none">
         <button class="text-2xl md:text-3xl font-serif tracking-widest text-zinc-900 uppercase focus:outline-none">
           {{ shop.name }}
         </button>
-      </div>
+      </a>
 
       <ul class="hidden lg:flex items-center space-x-10 text-sm font-medium uppercase tracking-widest text-zinc-600">
         {% assign selected_menu = section.settings.menu %}

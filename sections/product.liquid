@@ -1,37 +1,5 @@
 <!-- Structured Data (JSON-LD) -->
-<script type="application/ld+json">
-  {
-    "@context": "https://schema.org/",
-    "@type": "Product",
-    "name": "{{product.title | escape }}",
-    "image": "{{product.featured_image }}",
-    "description": "{{product.description }}",
-    "brand": { "@type": "Brand", "name": "LuxGlass" },
-    "category": "Serveware",
-    "offers": {
-      "@type": "Offer",
-      "priceCurrency": "USD",
-      "price": "178.00",
-      "availability": "https://schema.org/InStock",
-      "url": "https://luxglass.com/serveware/aurora-glass-pitcher"
-    },
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "5",
-      "reviewCount": "2"
-    },
-    {% comment %} "review": [
-      {
-        "@type": "Review",
-        "author": { "@type": "Person", "name": "Sarah M." },
-        "reviewBody": "The light refraction on these glasses is absolutely stunning. They feel substantial but not heavy, balanced perfectly for a long evening of conversation.",
-        "reviewRating": { "@type": "Rating", "ratingValue": "5" },
-        "datePublished": "2023-10-24",
-        "name": "Simply breathtaking quality."
-      }
-    ] {% endcomment %}
-  }
-</script>
+{% render json_ld.liquid,product:product %}
 <style>
   /* Skip-to-content link for keyboard users */
   .skip-link {
@@ -72,20 +40,15 @@
 
 <a href="#main-content" class="skip-link">Skip to main content</a>
 
-<div class="max-w-7xl mx-auto px-4 md:px-8">
-  <!--
-    ============================================================
-         BREADCRUMB NAV
-         Semantic: <nav> with aria-label, <ol> list, structured data
-    ============================================================
-  -->
+<div class="max-w-7xl mx-auto px-4 md:px-8" style="margin-top:2em">
+ 
   <nav
     aria-label="Breadcrumb"
     class="flex items-center space-x-2 text-[10px] font-bold tracking-widest uppercase text-zinc-400 mb-12"
   >
     <ol class="flex items-center space-x-2" itemscope itemtype="https://schema.org/BreadcrumbList">
       <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-        <a href="/" itemprop="item" class="hover:text-zinc-900 transition-colors">
+        <a href="{{ routes.root_url }}" itemprop="item" class="hover:text-zinc-900 transition-colors">
           <span itemprop="name">Home</span>
         </a>
         <meta itemprop="position" content="1">
@@ -108,9 +71,11 @@
         </svg>
       </li>
       <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-        <a href="/serveware" itemprop="item" class="hover:text-zinc-900 transition-colors">
-          <span itemprop="name">Serveware</span>
-        </a>
+        <button @click="console.log('alipne is active') itemprop="item" class="mt-4 hover:text-zinc-900 transition-colors" ">
+          <span itemprop="name">
+            {{ product.collections.first.title | escape }}
+          </span>
+        </button>
         <meta itemprop="position" content="2">
       </li>
       <li aria-hidden="true">
@@ -130,7 +95,9 @@
         </svg>
       </li>
       <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-        <span itemprop="name" aria-current="page" class="text-zinc-900">Aurora Glass Pitcher</span>
+        <span itemprop="name" aria-current="page" class="text-zinc-900">
+          {{ product.title | truncatewords:5 | escape }}
+        </span>
         <meta itemprop="position" content="3">
       </li>
     </ol>
@@ -175,7 +142,9 @@
       <div class="lg:col-span-5 flex flex-col">
         <!-- Category label -->
         <p class="text-zinc-400 text-[10px] tracking-widest uppercase font-bold mb-2">
-          <a href="/serveware" class="hover:text-zinc-700 transition-colors">Serveware</a>
+          <a href="/serveware" class="hover:text-zinc-700 transition-colors">
+              {{ product.product_type | escape }}
+          </a>
         </p>
 
         <!-- Product title – h1 is correct here as it's the page subject -->
