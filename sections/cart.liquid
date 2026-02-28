@@ -1,67 +1,100 @@
-<form action="{{ routes.cart_url }}" method="post">
-  {% for item in cart.items %}
-    <div class="cart-line">
-      <!-- Product/variant name -->
-      <div class="cart-line__info">
-        <a href="{{ item.url }}">{{ item.product.title }}</a>
-        {% if item.variant.title != 'Default Title' %}
-          <div class="cart-line__variant">{{ item.variant.title }}</div>
-        {% endif %}
+<h1 class="sr-only">Shopping Cart</h1>
+<main class="max-w-7xl mx-auto px-4 md:px-8 py-12 md:py-20" id="main-content">
+<form action="{{ routes.cart_url }}" method="post" class="cart"  id="{{ cart.id }}">
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
+    <!-- Cart Items Section -->
+    <section class="lg:col-span-8" aria-labelledby="cart-heading">
+      <div class="flex items-baseline justify-between mb-8 border-b border-black pb-4">
+        <h2 class="text-3xl md:text-4xl font-medium" id="cart-heading">Your cart</h2>
+        <span class="text-gray-500 text-lg" aria-label="2 items in cart">
+          ( {{ cart.item_count }} {{ cart.item_count | pluralize: 'item', 'items' }} )
+        </span>
       </div>
 
-      <!-- Unit price -->
-      <div class="cart-line__unit-price">
-        {{ item.final_price | money }}
+      <!-- Free Shipping Progress -->
+      {% render 'shipping-progress' %}
+
+      <!-- Cart Items List -->
+      <ul class="space-y-8" aria-label="Cart items">
+        <!-- Cart Item 1 -->
+        {% for item in cart.items %}
+          {% render 'cart-item',item:item %}
+        {% endfor %}
+      </ul>
+
+      <!-- Cart Note -->
+      <div class="mt-12 pt-12 border-t border-black/5">
+        <label for="cart-note" class="block text-sm uppercase tracking-widest mb-4 font-medium">
+          Add order note
+          <span class="sr-only">optional</span>
+        </label>
+        <textarea
+          id="cart-note"
+          rows="4"
+          placeholder="Special instructions for your order..."
+          class="w-full border border-black p-4 text-sm focus:outline-none focus:ring-2 focus:ring-black resize-none"
+          aria-describedby="cart-note-limit"
+          maxlength="500"
+          name="note"
+
+        > {{ cart.note }} </textarea>
+        <div class="text-[10px] text-gray-400 mt-2 text-right uppercase tracking-tighter" id="cart-note-limit">
+          <span aria-live="polite">0 / 500 characters ++++ </span>
+        </div>
       </div>
+    </section>
 
-      <!-- Quantity control -->
-      <div class="cart-line__quantity">
-        <input
-          type="number"
-          name="updates[{{ item.key }}]"
-          value="{{ item.quantity }}"
-          min="0"
-        >
-      </div>
-
-      <!-- Line total (unit price * quantity) -->
-      <div class="cart-line__total">
-        {{ item.final_line_price | money }}
-      </div>
-
-      <!-- Remove link -->
-      <div class="cart-line__remove">
-        <a href="{{ item.url_to_remove }}">Remove</a>
-      </div>
-    </div>
-  {% endfor %}
-
-  {%- comment -%}
-    Subtotal (items only)
-  {%- endcomment -%}
-  {% assign items_subtotal = 0 %}
-  {% for item in cart.items %}
-    {% assign items_subtotal = items_subtotal | plus: item.final_line_price %}
-  {% endfor %}
-
-  <div class="cart-summary">
-    <div class="cart-summary__row">
-      <span>Subtotal</span>
-      <span>{{ items_subtotal | money }}</span>
-    </div>
-
-    <div class="cart-summary__row cart-summary__row--total">
-      <span>Total</span>
-      <span>{{ cart.total_price | money }}</span>
-    </div>
-
-    <p class="cart-summary__note">
-      Taxes and shipping calculated at checkout.
-    </p>
-
-    <!-- Proceed to checkout -->
-    <button type="submit" name="checkout" class="cart-summary__checkout-button">
-      Checkout
-    </button>
+    <!-- Order Summary Section -->
+    {% render 'order-summary',cart:cart %}
+    <button type="submit" name="checkout" > send</button>
   </div>
-</form>
+  {% endform %}
+
+
+  <!-- Footer Navigation -->
+  <footer class="mt-20 pt-12 border-t border-black/5 flex flex-col md:flex-row justify-between items-center gap-8">
+    <a
+      href="/shop"
+      class="text-sm uppercase tracking-widest border-b border-black pb-1 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 transition-all"
+      aria-label="Continue shopping"
+    >
+      Continue shopping
+    </a>
+    <nav aria-label="Footer policies">
+      <ul class="flex gap-8 text-[10px] uppercase tracking-tighter text-gray-400">
+        <li>
+          <a
+            href="/refund-policy"
+            class="hover:text-black focus:text-black focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 transition-colors"
+          >
+            Refund Policy
+          </a>
+        </li>
+        <li>
+          <a
+            href="/shipping-policy"
+            class="hover:text-black focus:text-black focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 transition-colors"
+          >
+            Shipping Policy
+          </a>
+        </li>
+        <li>
+          <a
+            href="/privacy-policy"
+            class="hover:text-black focus:text-black focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 transition-colors"
+          >
+            Privacy Policy
+          </a>
+        </li>
+        <li>
+          <a
+            href="/terms-of-service"
+            class="hover:text-black focus:text-black focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 transition-colors"
+          >
+            Terms of Service
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </footer>
+</main>
