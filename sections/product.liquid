@@ -178,6 +178,8 @@
         <div class="space-y-8 mb-12">
           {% form 'product', product, class: 'product-form', id: 'product-form' %}
             <!-- Variant selector (dropdown example – replace with buttons/radios if needed) -->
+                            {% unless product.has_only_default_variant %}
+
             <fieldset class="border-0 p-0 m-0">
               <legend class="text-[10px] font-bold tracking-[0.3em] uppercase block mb-4">Variant</legend>
               <select name="id" class="w-full p-3 border border-zinc-300 rounded-md">
@@ -190,23 +192,31 @@
                     {{ variant.title }}
                   </option>
                 {% endfor %}
+                  
               </select>
             </fieldset>
+                            {% endunless %}
+
 
             <!-- Quantity -->
-            <div class="flex items-center gap-6 mt-6">
+            <div class="flex items-center gap-6 justify-between mt-6">
              <!--  <div role="spinbutton" aria-valuenow="1" aria-valuemin="1" aria-valuemax="99" aria-label="Quantity" class="flex items-center border border-zinc-200">
                 <button type="button" aria-label="Decrease quantity" class="p-4 hover:bg-zinc-50 text-zinc-500 transition-colors js-decrease-qty">-</button>
                 <button type="button" aria-label="Increase quantity" class="p-4 hover:bg-zinc-50 text-zinc-500 transition-colors js-increase-qty">+</button>
               </div>
 
  -->
-                 <input name="quantity" type="number" value="1" min="1" class="px-6 py-2 text-sm font-bold w-16 text-center border-x border-zinc-200" />
+              <div class="qty-input">
+  <button class="qty-count qty-count--minus" data-action="minus" type="button">-</button>
+  <input class="product-qty" type="number" name="product-qty" min="0" max="10" value="1">
+  <button class="qty-count qty-count--add" data-action="add" type="button">+</button>
+</div>
 
               <button
+
                 type="submit"
                 name="add"
-                class="flex-1 bg-zinc-900 text-white py-4 font-bold tracking-[0.2em] uppercase text-xs hover:bg-zinc-800 transition-all flex items-center justify-center gap-3"
+                class="max-w-[200px] flex-1 bg-zinc-900 text-white py-4 font-bold tracking-[0.2em] uppercase text-xs hover:bg-zinc-800 transition-all flex items-center justify-center gap-3"
                 aria-label="Add to bag"
               >
                 Add to Bag
@@ -251,91 +261,78 @@
     </section>
   </div>
 </div>
-<!-- Tab interactivity -->
-<script>
-  const tabs = document.querySelectorAll('[role="tab"]');
-  const panels = document.querySelectorAll('[role="tabpanel"]');
+<style>
+  .qty-input {
+  color: #000;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+.qty-input .product-qty,
+.qty-input .qty-count {
+  background: transparent;
+  color: inherit;
+  font-weight: normal;
+  font-size: inherit;
+  border: none;
+  display: inline-block;
+  min-width: 0;
+  height: 2rem;
+  line-height: 1;
+}
+.qty-input .product-qty:focus,
+.qty-input .qty-count:focus {
+  outline: none;
+}
+.qty-input .product-qty {
+  width: 40px;
+  min-width: 0;
+  display: inline-block;
+  text-align: center;
+  
+}
+.qty-input .product-qty::-webkit-outer-spin-button, .qty-input .product-qty::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+          appearance: none;
+  margin: 0;
+}
+.qty-input .qty-count {
+  padding: 0;
+  cursor: pointer;
+  width: 2rem;
+  font-size: 1.25em;
+  overflow: hidden;
+  position: relative;
+}
 
-  tabs.forEach((tab) => {
-    tab.addEventListener('click', () => {
-      // Deselect all
-      tabs.forEach((t) => {
-        t.setAttribute('aria-selected', 'false');
-        t.classList.remove('text-zinc-900');
-        t.classList.add('text-zinc-400');
-        const indicator = t.querySelector('span[aria-hidden]');
-        if (indicator) indicator.remove();
-      });
-      panels.forEach((p) => p.setAttribute('hidden', ''));
+.qty-input .qty-count--minus {
+  border-right: 1px solid #e2e2e2;
+}
+.qty-input .qty-count--add {
+  border-left: 1px solid #e2e2e2;
+}
+.qty-input .qty-count--add:after {
+  transform: rotate(90deg);
+}
+.qty-input .qty-count:disabled {
+  color: #ccc;
+  background: #f2f2f2;
+  cursor: not-allowed;
+  border-color: transparent;
+}
+.qty-input .qty-count:disabled:before, .qty-input .qty-count:disabled:after {
+  background: #ccc;
+}
 
-      // Select clicked
-      tab.setAttribute('aria-selected', 'true');
-      tab.classList.add('text-zinc-900');
-      tab.classList.remove('text-zinc-400');
-      const indicator = document.createElement('span');
-      indicator.setAttribute('aria-hidden', 'true');
-      indicator.className = 'absolute bottom-0 left-0 right-0 h-0.5 bg-zinc-900';
-      tab.appendChild(indicator);
 
-      const panel = document.getElementById(tab.getAttribute('aria-controls'));
-      panel.removeAttribute('hidden');
-      panel.focus();
-    });
 
-    // Arrow-key navigation
-    tab.addEventListener('keydown', (e) => {
-      const idx = [...tabs].indexOf(tab);
-      if (e.key === 'ArrowRight') {
-        tabs[(idx + 1) % tabs.length].click();
-        tabs[(idx + 1) % tabs.length].focus();
-      }
-      if (e.key === 'ArrowLeft') {
-        tabs[(idx - 1 + tabs.length) % tabs.length].click();
-        tabs[(idx - 1 + tabs.length) % tabs.length].focus();
-      }
-    });
-  });
+.qty-input {
+  border-radius: 4px;
 
-  // Quantity stepper
-  const output = document.querySelector('output[aria-live]');
-  const spinbutton = document.querySelector('[role="spinbutton"]');
-  const [decBtn, incBtn] = spinbutton.querySelectorAll('button');
-  let qty = 1;
-  decBtn.addEventListener('click', () => {
-    if (qty > 1) {
-      qty--;
-      output.textContent = qty;
-      spinbutton.setAttribute('aria-valuenow', qty);
-    }
-  });
-  incBtn.addEventListener('click', () => {
-    if (qty < 99) {
-      qty++;
-      output.textContent = qty;
-      spinbutton.setAttribute('aria-valuenow', qty);
-    }
-  });
-
-  // Set-size radio style sync
-  document.querySelectorAll('input[name="set-size"]').forEach((radio) => {
-    radio.addEventListener('change', () => {
-      document.querySelectorAll('input[name="set-size"]').forEach((r) => {
-        const span = r.nextElementSibling;
-        if (r.checked) {
-          span.className = span.className.replace(
-            'bg-white text-zinc-500 border-zinc-200',
-            'bg-zinc-900 text-white border-zinc-900'
-          );
-        } else {
-          span.className = span.className.replace(
-            'bg-zinc-900 text-white border-zinc-900',
-            'bg-white text-zinc-500 border-zinc-200'
-          );
-        }
-      });
-    });
-  });
-</script>
+  transform: scale(1.5);
+}
+</style>
 
 {% schema %}
 {
