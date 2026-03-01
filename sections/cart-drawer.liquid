@@ -41,7 +41,7 @@
   <!-- Cart Items Section -->
   <div class="flex-1 overflow-y-auto px-8 py-4 space-y-8 no-scrollbar" role="list" aria-label="Cart items">
     <!-- Cart Item -->
-    {% for item in cart.line_items %}
+    {% for item in cart.items %}
     <div class="flex gap-6" role="listitem">
       <div class="w-20 aspect-[3/4] bg-zinc-100 flex-shrink-0">
         <img
