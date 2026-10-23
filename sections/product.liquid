@@ -1,5 +1,5 @@
 <!-- Structured Data (JSON-LD) -->
-{% render json_ld.liquid,product:product %}
+{% render json_ld, product: product %}
 <style>
   /* Skip-to-content link for keyboard users */
   .skip-link {
@@ -343,3 +343,13 @@
   }
 }
 {% endschema %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render json_ld.liquid,product:product %}"
+  to: "{% render json_ld, product: product %}"
+  position: 35..73
+{% endcomment %}

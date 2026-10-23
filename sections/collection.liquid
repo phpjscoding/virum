@@ -508,7 +508,7 @@
 
         <!-- ===================== PAGINATION ===================== -->
         {%- if paginate.pages > 1 -%}
-          {% render page_numbers,paginate %}
+          {% render page_numbers %}
 
           <!-- Accessible page summary for screen readers -->
           <p class="sr-only" aria-live="polite">Page {{ paginate.current_page }} of {{ paginate.pages }}</p>
@@ -625,3 +625,13 @@
     });
   })();
 </script>
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render page_numbers,paginate %}"
+  to: "{% render page_numbers %}"
+  position: 23164..23189
+{% endcomment %}
